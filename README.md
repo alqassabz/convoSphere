@@ -1,1 +1,57 @@
-# project3_frontend
+# Project Title: Community Hub
+
+## Date: Oct 16, 2024
+
+### By: Zahra Alqassab, Hafsa Alkhaja, Muath Alsabbah, Mohammed Alhelo
+
+#### [GitHub](https://github.com/alqassabz/project3_frontend) 
+***
+
+### ***Description***
+#### This platform is a community-based web app that combines elements of Discord and Reddit, allowing users to create, join, and participate in various communities. The platform supports threaded replies, direct messaging, and personalized notifications. Users can explore all communities, join discussions, and receive invites from community admins.
+
+***
+
+### ***Technologies Used***
+* **React (Frontend Framework)** – For building the user interface and handling interactions.
+* **Node.js (Backend)** – For creating the API that handles community data, messages, and notifications.
+* **MongoDB (Database)** – For storing user, community, and message data.
+* **CSS/Styled Components** – For creating light and uncluttered UI designs.
+
+***
+
+### ***Getting Started***
+#### To view the project repository and set it up, visit the link [here](https://github.com/alqassabz/project3_frontend).
+
+
+
+#### **Key Features:**
+- **Home Page**: Displays all available communities.
+- **Join Button**: Allows users to join communities.
+- **Create Community**: Users can create new communities with sections like "coding," each with its own chat component.
+- **Threaded Replies**: Supports threaded comment replies within sections.
+- **Direct Messaging**: Private messaging between users, with notification support.
+- **Community Management**: Admins can invite members and manage community sections.
+- **My Communities**: Displays all communities the user is part of with options to leave.
+
+***
+
+### ***Future Updates***
+
+- [ ] **Threaded Comments with Nested Replies** (Initial implementation in progress)
+- [ ] **User Roles within Communities** (Admins, Moderators, Members)
+- [ ] **Advanced Search Functionality** for communities and discussions
+- [ ] **Improved Notifications** for direct messages and community activity(real-time)
+- [ ] **Mobile Responsiveness** for a better user experience on mobile devices
+
+***
+
+### ***Screenshots***
+
+##### No screenshots available yet
+
+***
+
+### ***Credits***
+
+##### No credits yet
