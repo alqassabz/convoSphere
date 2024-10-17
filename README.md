@@ -58,6 +58,12 @@
 ![image](https://github.com/user-attachments/assets/e836ad19-07c1-4140-a280-33be26a1db44)
 
 
+##### Wireframe
+
+![image](https://github.com/user-attachments/assets/b0a2f7e2-b704-4552-9f12-abb134767abd)
+
+
+
 ***
 
 ### ***Credits***
