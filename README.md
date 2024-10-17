@@ -48,7 +48,15 @@
 
 ### ***Screenshots***
 
-##### No screenshots available yet
+##### ERD
+
+![image](https://github.com/user-attachments/assets/5ffe8453-c6df-4a03-b920-2613948d9fc1)
+
+
+##### Component Heirarchy Diagram
+
+![image](https://github.com/user-attachments/assets/e836ad19-07c1-4140-a280-33be26a1db44)
+
 
 ***
 
