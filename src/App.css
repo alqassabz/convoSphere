@@ -1,42 +1,210 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+body {
+  margin: 0;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  width: 100vw;
+  height: 30vh;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+
+.issues-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 85%;
+  margin-left: 110px;
+  justify-content: space-between;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.issue-card {
+  margin-left: 20px;
+  background-color: #4a4b4b;
+  border: 1px solid #e0e0e0;
+  color: #fff; /* Adjusting for light text on dark background */
+  border-radius: 20px;
 }
 
-.card {
-  padding: 2em;
+.card-title {
+  font-weight: bold;
+  color: #fff; /* Keeping the title text white */
 }
 
-.read-the-docs {
-  color: #888;
+.card-text {
+  color: #d4cece;
+  padding-left: 20px;
+}
+
+.card-body {
+  display: flex;
+  justify-content: space-between; /* This separates the two <p> elements */
+
+}
+
+
+
+small {
+  padding-right: 20px
+}
+
+
+
+.reply {
+  background-color: #022a4c; /* Light blue background for replies */
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px 0;
+}
+
+.replies-container {
+  margin-top: 10px;
+  padding: 10px;
+  border-top: 1px solid #ccc; /* Add a top border to separate replies */
+}
+
+.reply-form {
+  margin: 10px 20px;
+
+}
+
+.reply-form input {
+  padding: 5px;
+  border-radius: 4px;
+  background-color: #c6c1c1;
+  border: 1px solid #ccc;
+  color: rgb(81, 79, 79)
+}
+
+.reply-form button {
+  margin-left: 5px;
+  padding: 5px 10px;
+  background-color: #022041; /* Change button color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.reply-form button:hover {
+  background-color: #2e4f73; /* Darker shade on hover */
+}
+
+.reply-icon{
+  color: #c6c1c1;
+  padding-top:20px;
+  padding-right: 20px;
+}
+
+.reply-icon:hover{
+  cursor: pointer;
+  color:#5d6565
+}
+
+
+.textarea{
+  width:65%;
+}
+
+
+.community-form {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  height: 500px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical; /* Allow vertical resizing */
+}
+
+.icon-selector {
+  border: 1px solid #ccc;
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 4px;
+}
+
+.icon-preview {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.dropdown-menu {
+  border: 1px solid #ccc;
+  margin-top: 5px;
+  padding: 5px;
+  width: 250px; /* Make dropdown width responsive */
+  background-color: white;
+  position: absolute; /* Position dropdown relative to icon selector */
+  z-index: 1; /* Ensure dropdown appears above other elements */
+  display: grid; /* Use grid for layout */
+  grid-template-columns: repeat(4, 1fr); /* Create 4 equal columns */
+  gap: 5px; /* Space between items */
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.dropdown-item:hover {
+  background-color: #f0f0f0; /* Highlight on hover */
+}
+
+.icon-option {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #45a049; /* Darker green on hover */
 }
