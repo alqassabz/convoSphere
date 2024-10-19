@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  
   text-align: center;
 }
 
@@ -458,6 +459,8 @@ body{
   color: white;
 }
 
+
+
 nav{
   max-height: 4em;
   min-height: 4em;
@@ -469,6 +472,13 @@ nav{
   background-color: #000000;
   color: white;
   
+}
+
+header{
+  position: fixed; 
+  width: 100%;
+  height: 60px; /* Fixed height for the navbar */
+  z-index: 1001; /* Ensures it appears above the sidebar */
 }
 
 nav a,
@@ -541,9 +551,6 @@ nav a:hover {
   border-radius: 10%; /* Optional: keep the image circular */
 }
 
-ul{
-  list-style: none;
-}
 .sidebar {
   position: fixed;
   top: 0;
@@ -565,7 +572,7 @@ ul{
   padding: 0;
 }
 
-.sidebar ul li {
+.sidebar ul li, .sidebar h3 {
   padding: 15px;
 }
 
@@ -575,15 +582,16 @@ ul{
 }
 
 .close-btn {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 30px;
-  cursor: pointer;
-  position: absolute;
-  top: 10px;
-  right: 15px;
+  background: none; 
+  border: none; 
+  font-size: 24px; 
+  cursor: pointer; 
+  position: absolute; 
+  top: 75px; 
+  right: 20px; 
+  color: #000; 
 }
+
 
 
 .toggler{
@@ -599,10 +607,10 @@ font-size: x-large;
 
 .sidebar {
   position: fixed; /* Keeps the sidebar in place */
-  top: 0;
+  top: 60;
   left: 0;
   width: 250px; /* Set your desired width */
-  height: 100%; /* Full height */
+  height: (100%-60px); /* Full height */
   background-color: #333; /* Sidebar background color */
   color: white; /* Text color */
   transition: transform 0.3s ease; /* Smooth transition */
@@ -618,9 +626,16 @@ font-size: x-large;
 main {
   transition: margin-left 0.3s ease; /* Smooth transition */
   padding: 20px; /* Optional padding */
+  padding-top: 100px;
 }
 
 main.shifted {
   margin-left: 250px; /* Match the sidebar's width */
 }
 
+
+.list{
+  margin-top: 100px;
+  text-align: left;
+  margin-left: 5px;
+}

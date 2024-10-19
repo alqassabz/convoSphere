@@ -12,7 +12,7 @@ import SideBar from './components/SideBar';
 function App() {
   const [issues, setIssues] = useState([]);
   const [communities, setCommunities] = useState([]);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true)
   // console.log(user)
 
   const [user, setUser] = useState(null)

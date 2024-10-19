@@ -23,9 +23,6 @@ const Nav = ({ user, handleLogout, toggleSidebar }) => {
 
   return (
     <header>
-      <Link to="/">
-        <div className="logo-wrapper" alt="logo"></div>
-      </Link>
       {publicOptions}
     </header>
   )
