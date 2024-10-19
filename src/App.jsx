@@ -6,10 +6,21 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 // import { get } from 'mongoose';
 import Comment from './components/Comment';
+import Nav from './components/Nav';
+import SideBar from './components/SideBar';
 
 function App() {
   const [issues, setIssues] = useState([]);
   const [communities, setCommunities] = useState([]);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  // console.log(user)
+
+  const [user, setUser] = useState(null)
+  const handleLogout = () => {
+    //Reset all auth related state and clear localStorage
+    setUser(null)
+    localStorage.clear()
+  }
 
   const getIssues = async () => {
     try {
@@ -32,6 +43,10 @@ function App() {
     }
   };
 
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen); // Toggle sidebar open/close state
+  };
+
   useEffect(() => {
     getIssues();
     getCommunities()
@@ -39,7 +54,9 @@ function App() {
 
   return (
     <div className="App">
-      <main>
+      <Nav user={user} handleLogout={handleLogout} toggleSidebar={toggleSidebar} />
+      <SideBar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} communities={communities} />
+      <main className={isSidebarOpen ? 'shifted' : ''}>
         <Routes>
           <Route path="/" element={<Home getIssues={getIssues} issues={issues} setIssues={setIssues} getCommunities={getCommunities} communities={communities} setCommunities={setCommunities} />} />
           <Route path="/form" element={<Form getCommunities={getCommunities} communities={communities} setCommunities={setCommunities} />} /> {/* This should work */}

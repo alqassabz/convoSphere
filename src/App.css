@@ -57,10 +57,11 @@ small {
 
 
 .reply {
-  background-color: #022a4c; /* Light blue background for replies */
+  background-color: #7f858a; /* Light blue background for replies */
   border-radius: 5px;
   padding: 5px;
   margin: 5px 0;
+  color: black;
 }
 
 .replies-container {
@@ -119,7 +120,7 @@ small {
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  background-color: #f9f9f9;
+  background-color: #313131;
   height: 500px;
 }
 
@@ -218,7 +219,6 @@ textarea {
   align-items: flex-start;
   gap: 40px;
   padding: 20px;
-  background-color: #f5f5f5;
 }
 
 /* Styling individual community box */
@@ -314,18 +314,28 @@ textarea {
     width: 90%;
     margin-bottom: 20px;
   }
+
+  .box-big{
+    width: 100%;
+
+  }
 }
 
 
 /* General form styling */
 .community-form {
   max-width: 600px;
-  margin: 0 auto;
+
   margin-top: 30px;
-  padding: 20px;
-  background-color: #f5f5f5;
+
+  background-color: #313131;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  height: 500px;
 }
 
 /* Form input and label styling */
@@ -403,7 +413,7 @@ textarea {
 
 /* Button styling */
 .submit-button {
-  background-color: #333;
+  background-color: #767575;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -443,7 +453,39 @@ textarea {
   margin-bottom: 20px;
 }
 
+body{
+  background-color: #02162c;
+  color: white;
+}
 
+nav{
+  max-height: 4em;
+  min-height: 4em;
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+  background-color: #000000;
+  color: white;
+  
+}
+
+nav a,
+nav h3 {
+  text-decoration-color: var(--primary-bg);
+  margin: auto 1em;
+  color: var(--link-color-primary);
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-weight: 800;
+  transition: all 0.2s ease;
+}
+
+nav a:hover {
+  color: var(--link-color-secondary);
+  text-decoration-color: var(--link-color-primary);
+}
 
 
 /* Styling individual community box */
@@ -451,7 +493,8 @@ textarea {
   background-color: #333;
   color: white;
   border: none;
-  width: 1380px;
+  /* width: 1380px; */
+  width: 90%;
   margin: 20px 50px;
   padding: 20px;
   border-radius: 15px;
@@ -497,3 +540,87 @@ textarea {
   object-fit: cover; /* Make sure the image fits nicely */
   border-radius: 10%; /* Optional: keep the image circular */
 }
+
+ul{
+  list-style: none;
+}
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px; /* Hide sidebar off-screen */
+  height: 100%;
+  width: 250px;
+  background-color: #333;
+  color: white;
+  transition: left 0.3s ease; /* Smooth transition */
+  z-index: 1000;
+}
+
+.sidebar.open {
+  left: 0; /* Show sidebar */
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  padding: 15px;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+}
+
+
+.toggler{
+background-color: transparent;
+border: none;
+color: white;
+font-size: x-large;
+}
+
+.toggler:hover{
+  cursor: pointer;
+}
+
+.sidebar {
+  position: fixed; /* Keeps the sidebar in place */
+  top: 0;
+  left: 0;
+  width: 250px; /* Set your desired width */
+  height: 100%; /* Full height */
+  background-color: #333; /* Sidebar background color */
+  color: white; /* Text color */
+  transition: transform 0.3s ease; /* Smooth transition */
+  transform: translateX(-100%); /* Hidden by default */
+  z-index: 1000; /* Make sure it appears above other content */
+}
+
+.sidebar.open {
+  transform: translateX(0); /* Move into view when open */
+}
+
+
+main {
+  transition: margin-left 0.3s ease; /* Smooth transition */
+  padding: 20px; /* Optional padding */
+}
+
+main.shifted {
+  margin-left: 250px; /* Match the sidebar's width */
+}
+
