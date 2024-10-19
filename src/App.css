@@ -104,7 +104,7 @@ small {
 
 .reply-icon:hover{
   cursor: pointer;
-  color:#5d6565
+  color:#000000
 }
 
 
@@ -182,7 +182,7 @@ textarea {
   display: flex;
   align-items: center;
   cursor: pointer;
-  padding: 5px;
+  padding: 20px;
 }
 
 .dropdown-item:hover {
@@ -192,7 +192,7 @@ textarea {
 .icon-option {
   width: 40px;
   height: 40px;
-  margin-right: 10px;
+  /* margin-right: 10px; */
 }
 
 .submit-button {
@@ -207,4 +207,293 @@ textarea {
 
 .submit-button:hover {
   background-color: #45a049; /* Darker green on hover */
+}
+
+
+/* Styling the container for community boxes */
+.boxes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+/* Styling individual community box */
+.box {
+  background-color: #333;
+  color: white;
+  border: none;
+  width: 350px;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Hover effect for the box */
+.box:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Header containing the title and icon */
+.box-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+/* Community icon container styling */
+.community-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* Makes the container circular */
+  border: 2px solid #f0e59f; /* Border around the container */
+  display: flex; /* Use flexbox to center the image */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  overflow: hidden; /* Hide any overflow of the image */
+  background-color: #f0e59f; /* Optional: background color */
+}
+
+/* Image inside the community icon */
+.community-icon img {
+  width: 30px; /* Adjust the image width */
+  height: 30px; /* Adjust the image height */
+  object-fit: cover; /* Make sure the image fits nicely */
+  border-radius: 10%; /* Optional: keep the image circular */
+}
+
+
+.box img{
+  background-color:#f0e59f ;
+}
+
+/* Title of the community */
+.box-header h3 {
+  font-family: 'Arial', sans-serif;
+  font-size: 22px;
+  font-weight: bold;
+  color: #f0e59f;
+  margin: 0;
+}
+
+/* Community description in the middle */
+.description {
+  font-family: 'Verdana', sans-serif;
+  font-size: 16px;
+  color: #ddd;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+/* Creator name or email at the bottom */
+.creator {
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  color: #bbb;
+  margin-top: auto; /* Pushes it to the bottom of the box */
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .boxes {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .box {
+    width: 90%;
+    margin-bottom: 20px;
+  }
+}
+
+
+/* General form styling */
+.community-form {
+  max-width: 600px;
+  margin: 0 auto;
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Form input and label styling */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* Custom select styling */
+.custom-select {
+  margin-bottom: 20px;
+}
+
+.icon-selector {
+  /* padding: 10px; */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Preview image shown when an icon is selected */
+.icon-preview {
+  width: 30px; /* Set width to 50px */
+  height: 30px; /* Set height to 50px */
+  object-fit: cover; /* Make sure the image fits nicely inside */
+  border-radius: 10%; /* Make it circular */
+}
+
+/* Dropdown menu styling */
+.dropdown-menu {
+  margin-top: 10px;
+  padding: 20px;
+  padding-right: 65px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-item {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0px;
+}
+
+/* Make all icons in the dropdown smaller */
+.icon-option {
+  width: 30px; /* Set a smaller width for the icons */
+  height: 30px; /* Set a smaller height for the icons */
+  object-fit: cover; /* Ensure the image doesn't stretch or distort */
+  border-radius: 10%; /* Make it circular */
+}
+
+/* Button styling */
+.submit-button {
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.submit-button:hover {
+  background-color: #555;
+}
+
+
+
+
+
+.box-big img{
+  background-color:#f0e59f ;
+}
+
+/* Title of the community */
+.box-header-big h3 {
+  font-family: 'Arial', sans-serif;
+  font-size: 22px;
+  font-weight: bold;
+  color: #f0e59f;
+  margin: 0;
+}
+
+/* Community description in the middle */
+.description-big {
+  font-family: 'Verdana', sans-serif;
+  font-size: 16px;
+  color: #ddd;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+
+
+
+/* Styling individual community box */
+.box-big {
+  background-color: #333;
+  color: white;
+  border: none;
+  width: 1380px;
+  margin: 20px 50px;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Hover effect for the box */
+.box-big:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Header containing the title and icon */
+.box-header-big {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+
+.community-icon-big {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* Makes the container circular */
+  border: 2px solid #f0e59f; /* Border around the container */
+  display: flex; /* Use flexbox to center the image */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  overflow: hidden; /* Hide any overflow of the image */
+  background-color: #f0e59f; /* Optional: background color */
+}
+
+/* Image inside the community icon */
+.community-icon-big img {
+  width: 30px; /* Adjust the image width */
+  height: 30px; /* Adjust the image height */
+  object-fit: cover; /* Make sure the image fits nicely */
+  border-radius: 10%; /* Optional: keep the image circular */
 }

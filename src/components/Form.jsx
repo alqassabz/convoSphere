@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
+import {useNavigate} from 'react-router-dom'
+import Home from './Home';
 
 
-const Form = () => {
+const Form = ({getCommunities, communities, setCommunities}) => {
+const navigate = useNavigate()
+
   const [iconValue, setIconValue] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -11,27 +15,25 @@ const Form = () => {
 
   // List of images from the public folder
   const images = [
-    { value: 'icon1', src: '/test.png' },
-    { value: 'icon2', src: '/test.png' },
-    { value: 'icon3', src: '/test.png' },
-    { value: 'icon3', src: '/test.png' },
-    { value: 'icon3', src: '/test.png' },
-    { value: 'icon3', src: '/test.png' },
-    { value: 'icon3', src: '/test.png' },
-    { value: 'icon3', src: '/test.png' },
-    { value: 'icon3', src: '/test.png' },
-    { value: 'icon3', src: '/test.png' },
-    { value: 'icon3', src: '/test.png' },
-    { value: 'icon3', src: '/test.png' },
-    { value: 'icon3', src: '/test.png' },
-    { value: 'icon3', src: '/test.png' },
-    { value: 'icon3', src: '/test.png' },
+    { value: 'art', src: '/art.png' },
+    { value: 'basketball', src: '/basketball.png' },
+    { value: 'code', src: '/code.png' },
+    { value: 'duck', src: '/duck.png' },
+    { value: 'explore', src: '/explore.png' },
+    { value: 'food', src: '/food.png' },
+    { value: 'gaming', src: '/gaming.png' },
+    { value: 'medical', src: '/medical.png' },
+    { value: 'race', src: '/race.png' },
+    { value: 'space', src: '/space.png' },
+    { value: 'surf', src: '/surf.png' },
+    { value: 'travel', src: '/travel.png' }
+  
     // Add more images as needed
   ];
 
   const handleIconSelect = (icon) => {
     setSelectedIcon(icon.value);
-    setIconValue(icon.src);
+    setIconValue(icon.value);
     setDropdownOpen(false); // Close the dropdown after selecting
   };
 
@@ -57,12 +59,16 @@ const Form = () => {
       if (response.ok) {
         const newCommunity = await response.json();
         console.log('Community created:', newCommunity);
+        navigate("/")
       } else {
         console.error('Error creating community:', response.statusText);
       }
     } catch (error) {
       console.error('Error:', error);
     }
+
+    
+    
   };
 
   const CustomSelect = () => (

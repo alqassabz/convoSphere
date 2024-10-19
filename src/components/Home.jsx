@@ -10,134 +10,44 @@ const Home = ({
   communities,
   setCommunities
 }) => {
-  const [replies, setReplies] = useState({}); // Track replies per issue
-  const [showReplyInput, setShowReplyInput] = useState({}); // Track which reply input is shown
 
-  const initialState = { comment: '' }; // Define initial state
-  const [formState, setFormState] = useState(initialState);
-
-  const submitReply = async (issueId) => {
-    if (!replies[issueId]?.trim()) return
-
-    try {
-      const res = await axios.post(
-        `http://localhost:3001/issues/${issueId}/reply`,
-        { comment: replies[issueId] }
-      )
-      setIssues((prevIssues) =>
-        prevIssues.map((issue) =>
-          issue._id === issueId
-            ? { ...issue, replies: res.data.replies }
-            : issue
-        )
-      )
-      setReplies((prevReplies) => ({ ...prevReplies, [issueId]: '' })); // Clear the reply input for that issue
-      setShowReplyInput((prev) => ({ ...prev, [issueId]: false })); // Hide reply input after submitting
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
-  const handleChange = (event) => {
-    setFormState({ ...formState, [event.target.id]: event.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    let response = await axios.post('http://localhost:3001/issues', formState);
-    setIssues([...issues, response.data]);
-    setFormState(initialState);
-  };
+  useEffect(()=>{
+getCommunities()
+  },[])
+  
 
   return (
     <div>
+      <h1>Newest Community</h1>
+      <div>
+      {communities.length > 0 && (
+        <div className="box-big">
+          <div className="box-header-big">
+            <div className='community-icon-big'>
+            <img src={`/public/${communities[communities.length - 1].icon}.png`} alt={`${communities[communities.length - 1].name} icon`} /></div>
+            <h3>{communities[communities.length - 1].name}</h3>
+          </div>
+          <p className="description-big">{communities[communities.length - 1].description}</p>
+          <p className="creator-big">{communities[communities.length - 1].email}</p>
+        </div>
+      )}
+      </div>
       <h1>Communities</h1>
-      <div>
+      <div className='boxes'>
         {communities.map((community) => (
-          <div key={community._id}>
+          <div className='box' key={community._id}>
+          <div className="box-header">
+            <div className='community-icon'>
+            <img src={`/public/${community.icon}.png`} alt={`${community.name} icon`} /></div>
             <h3>{community.name}</h3>
-            <h3>{community.email}</h3>
-            <h3>{community.description}</h3>
-            <img src={`/public${community.icon}`} alt="" />
           </div>
+          <p className="description">{community.description}</p>
+          <p className="creator">{community.email}</p>
+        </div>
         ))}
       </div>
 
-      <h2>Issues</h2>
-      <div className="issues-container">
-        {issues.map((issue) => (
-          <div key={issue._id} className="card issue-card mb-3">
-            <div className="card-body">
-              <p className="card-text">Comment: {issue.comment}</p>
-              <p className="card-footer text-muted">
-                <small>{new Date(issue.createdAt).toDateString()}</small>
-              </p>
-
-              {/* Reply icon */}
-              <div
-                className="reply-icon"
-                onClick={() =>
-                  setShowReplyInput((prev) => ({
-                    ...prev,
-                    [issue._id]: !prev[issue._id]
-                  }))
-                }
-              >
-                <HiReply />
-              </div>
-            </div>
-
-            {/* Render replies below the card body */}
-            <div className="replies-container">
-              {issue.replies && issue.replies.length > 0 ? (
-                <h5>Replies:</h5>
-              ) : (
-                <p>No replies yet.</p>
-              )}
-              {issue.replies &&
-                issue.replies.map((reply, index) => (
-                  <div key={index} className="reply">
-                    <p>
-                      {reply.comment} -{' '}
-                      <small>{new Date(reply.createdAt).toDateString()}</small>
-                    </p>
-                  </div>
-                ))}
-            </div>
-
-            {/* Reply form below the replies */}
-            {showReplyInput[issue._id] && (
-              <div className="reply-form">
-                <input
-                  type="text"
-                  value={replies[issue._id] || ''}
-                  onChange={(e) =>
-                    setReplies({ ...replies, [issue._id]: e.target.value })
-                  }
-                  placeholder="Write a reply..."
-                  style={{ width: '80%', marginTop: '5px' }} // Adjust the width as needed
-                />
-                <button onClick={() => submitReply(issue._id)}>Submit</button>
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-
-      <div>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="comment">Message</label>
-          <textarea
-            id="comment"
-            cols="50"
-            rows="2"
-            onChange={handleChange}
-            value={formState.comment}
-            className='textarea'
-          ></textarea>
-          <button type="submit">Send</button>
-        </form>
-      </div>
+      
     </div>
   );
 };
