@@ -16,3 +16,5 @@ const SideBar = ({ isOpen, toggleSidebar, communities }) => {
 };
 
 export default SideBar
+
+

@@ -23,7 +23,7 @@ const Home = ({
     // Only filter if communities have been loaded
     if (communities.length > 0) {
       const filtered = communities.filter(community =>
-        community.name.includes(searchTerm)
+        community.name.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setFilteredCommunities(filtered);
     } else {

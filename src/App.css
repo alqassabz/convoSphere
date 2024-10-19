@@ -7,12 +7,13 @@ body {
 form {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 
   width: 100vw;
   height: 30vh;
 }
+
 
 
 
@@ -110,9 +111,9 @@ small {
 }
 
 
-.textarea{
+/* .textarea{
   width:65%;
-}
+} */
 
 
 .community-form {
@@ -516,6 +517,36 @@ nav a:hover {
   text-align: center;
 }
 
+.textarea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  width: 60%;
+  margin: 20px 0;
+}
+
+.shifted .textarea, .shifted .comment-label, .shifted .comment-btn   {
+  margin-left: -270px;
+}
+
+.comment-btn{
+  background-color: #302f2f;
+  padding: 15px 10px;
+  border: none;
+  border-radius: 10px;
+  width: 150px;
+  color: white;
+}
+
+.comment-btn:hover{
+  background-color: #525151;
+  color: black;
+  cursor:pointer;
+}
+
+
 /* Hover effect for the box */
 .box-big:hover {
   transform: translateY(-10px);
@@ -552,15 +583,13 @@ nav a:hover {
 }
 
 .sidebar {
-  position: fixed;
-  top: 0;
-  left: -250px; /* Hide sidebar off-screen */
-  height: 100%;
-  width: 250px;
-  background-color: #333;
-  color: white;
-  transition: left 0.3s ease; /* Smooth transition */
-  z-index: 1000;
+  width: 250px; /* Set the width of the sidebar */
+  height: 100vh; /* Make the sidebar full height of the viewport */
+  overflow-y: scroll; /* Enable vertical scrolling */
+  background-color: #f4f4f4; /* Background color */
+  border-right: 1px solid #ccc; /* Optional: border for better visual separation */
+  padding: 10px; /* Optional: padding for better spacing */
+  position: relative;
 }
 
 .sidebar.open {
@@ -580,6 +609,22 @@ nav a:hover {
   color: white;
   text-decoration: none;
 }
+
+.sidebar {
+  scroll-behavior: smooth; /* Optional: smooth scroll */
+}
+
+.sidebar {
+  scrollbar-width: thin; /* For Firefox */
+}
+
+/* For WebKit browsers (Chrome, Safari) */
+.sidebar::-webkit-scrollbar {
+  width: 0; /* Hide scrollbar */
+  background: transparent; /* Optional: background color */
+}
+
+
 
 .close-btn {
   background: none; 
@@ -643,4 +688,10 @@ main.shifted {
 .search-input{
   width: 300px;
   margin-right: 30px;
+}
+
+
+.sidebar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }

@@ -114,7 +114,7 @@ const Comment = ({getIssues,
 
       <div>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="comment">Message</label>
+          <label className='comment-label' htmlFor="comment">Message</label>
           <textarea
             id="comment"
             cols="50"
@@ -123,7 +123,7 @@ const Comment = ({getIssues,
             value={formState.comment}
             className='textarea'
           ></textarea>
-          <button type="submit">Send</button>
+          <button className='comment-btn' type="submit">Send</button>
         </form>
       </div>
     </>
