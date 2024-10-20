@@ -104,7 +104,6 @@ function App() {
               />
             }
           />{' '}
-          {/* This should work */}
           <Route path="signIn" element={<SignIn />} />
           <Route path="register" element={<Register />} />
 
