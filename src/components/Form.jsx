@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import {useNavigate} from 'react-router-dom'
-import Home from './Home';
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import { FaLessThanEqual } from 'react-icons/fa6'
 
+const Form = ({ getCommunities, communities, setCommunities }) => {
+  const navigate = useNavigate()
+  const [iconValue, setIconValue] = useState('')
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [description, setDescription] = useState('')
+  const [selectedIcon, setSelectedIcon] = useState('')
+  const [dropdownOpen, setDropdownOpen] = useState(false)
+  const [fields, setFields] = useState([{ name: '', description: '' }])
 
-const Form = ({getCommunities, communities, setCommunities}) => {
-const navigate = useNavigate()
-
-  const [iconValue, setIconValue] = useState('');
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [description, setDescription] = useState('');
-  const [selectedIcon, setSelectedIcon] = useState('');
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-
-  // List of images from the public folder
+  const BASE_URL = 'http://localhost:3001'
   const images = [
     { value: 'art', src: '/art.png' },
     { value: 'basketball', src: '/basketball.png' },
@@ -27,93 +27,101 @@ const navigate = useNavigate()
     { value: 'space', src: '/space.png' },
     { value: 'surf', src: '/surf.png' },
     { value: 'travel', src: '/travel.png' }
-  
-    // Add more images as needed
-  ];
+  ]
 
   const handleIconSelect = (icon) => {
-    setSelectedIcon(icon.value);
-    setIconValue(icon.value);
-    setDropdownOpen(false); // Close the dropdown after selecting
-  };
+    setSelectedIcon(icon.value)
+    setIconValue(icon.value)
+    setDropdownOpen(false)
+  }
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault()
 
-    const formData = {
+    const communityData = {
+      icon: iconValue,
       name,
       email,
-      icon: iconValue,
       description,
-    };
-
-    try {
-      const response = await fetch('http://localhost:3001/communities', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        const newCommunity = await response.json();
-        console.log('Community created:', newCommunity);
-        navigate("/")
-      } else {
-        console.error('Error creating community:', response.statusText);
-      }
-    } catch (error) {
-      console.error('Error:', error);
+      fields
     }
 
-    
-    
-  };
+    try {
+      console.log(communityData.fields)
+      await axios.post(`${BASE_URL}/communities`, communityData)
+      navigate('/')
+      // if (response.status === 200) {
+      //   const newCommunity = response.data;
+      //   setCommunities([...communities, newCommunity]);
+      // }
+    } catch (error) {
+      console.error('Error creating community:', error)
+    }
+  }
 
-  const CustomSelect = () => (
-    <div className="custom-select">
-      <label htmlFor="icon-select">Select an Icon:</label>
-      <div 
-        className="icon-selector" 
-        onClick={() => setDropdownOpen(!dropdownOpen)}
-      >
-        {selectedIcon ? (
-          <img
-            src={images.find(image => image.value === selectedIcon)?.src}
-            alt={selectedIcon}
-            className="icon-preview"
-          />
-        ) : (
-          'Select an icon'
-        )}
-      </div>
-      {dropdownOpen && (
-        <div className="dropdown-menu">
-          {images.map((icon) => (
-            <div 
-              key={icon.value} 
-              className="dropdown-item" 
-              onClick={() => handleIconSelect(icon)}
-            >
-              <img
-                src={icon.src}
-                alt={icon.value}
-                className="icon-option"
-              />
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
+  const addField = () => {
+    if (fields.length < 5) {
+      setFields([...fields, ''])
+    }
+  }
+
+  const removeField = (index) => {
+    const newFields = fields.filter((_, i) => i !== index)
+    setFields(newFields)
+  }
+
+  const handleFieldChange = (index, event, isDescription = false) => {
+    const newFields = [...fields]
+    if (isDescription) {
+      newFields[index] = {
+        ...newFields[index],
+        description: event.target.value
+      }
+    } else {
+      newFields[index] = {
+        ...newFields[index],
+        name: event.target.value
+      }
+    }
+    setFields(newFields)
+  }
 
   return (
     <form className="community-form" onSubmit={handleSubmit}>
       <h1>Create Community</h1>
-      <CustomSelect />
+      <div className="custom-select">
+        <label>Select an Icon:</label>
+        <div
+          className="icon-selector"
+          onClick={() => setDropdownOpen(!dropdownOpen)}
+        >
+          {selectedIcon ? (
+            <img
+              src={images.find((image) => image.value === selectedIcon)?.src}
+              alt={selectedIcon}
+              className="icon-preview"
+            />
+          ) : (
+            'Select an icon'
+          )}
+        </div>
+        {dropdownOpen && (
+          <div className="dropdown-menu">
+            {images.map((icon) => (
+              <div
+                key={icon.value}
+                className="dropdown-item"
+                onClick={() => handleIconSelect(icon)}
+              >
+                <img src={icon.src} alt={icon.value} className="icon-option" />
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
       <div className="form-group">
-        <label htmlFor="name">Name:</label>
+        <label htmlFor="name">Community name:</label>
         <input
           type="text"
           id="name"
@@ -122,8 +130,9 @@ const navigate = useNavigate()
           required
         />
       </div>
+
       <div className="form-group">
-        <label htmlFor="email">Email:</label>
+        <label htmlFor="email">Special Invitations:</label>
         <input
           type="email"
           id="email"
@@ -132,6 +141,7 @@ const navigate = useNavigate()
           required
         />
       </div>
+
       <div className="form-group">
         <label htmlFor="description">Description:</label>
         <textarea
@@ -140,9 +150,44 @@ const navigate = useNavigate()
           onChange={(e) => setDescription(e.target.value)}
         />
       </div>
-      <button type="submit" className="submit-button">Create Community</button>
-    </form>
-  );
-};
 
-export default Form;
+      <div id="new-input-container" className="form-group">
+        {fields.map((field, index) => (
+          <div className="dynamic-field" key={index}>
+            <input
+              type="text"
+              className="dynamic-input"
+              placeholder={`Field ${index + 1} Name`}
+              value={field.name}
+              onChange={(e) => handleFieldChange(index, e, false)} // For name
+            />
+            <input
+              type="text"
+              className="dynamic-input"
+              placeholder={`Field ${index + 1} Description`}
+              value={field.description}
+              onChange={(e) => handleFieldChange(index, e, true)} // For description
+            />
+            <button
+              type="button"
+              onClick={() => removeField(index)}
+              className="remove-button"
+            >
+              ❌
+            </button>
+          </div>
+        ))}
+      </div>
+
+      <button type="button" onClick={addField} className="add-button">
+        ➕
+      </button>
+
+      <button type="submit" className="submit-button">
+        Create Community
+      </button>
+    </form>
+  )
+}
+
+export default Form
