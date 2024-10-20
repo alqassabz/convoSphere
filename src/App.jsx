@@ -1,19 +1,21 @@
-import './App.css';
-import { Route, Routes } from 'react-router-dom';
-import Home from './components/Home';
-import Form from './components/Form'; // Correct import
-import axios from 'axios';
-import { useState, useEffect } from 'react';
+import './App.css'
+import { Route, Routes } from 'react-router-dom'
+import Home from './components/Home'
+import Form from './components/Form' // Correct import
+import axios from 'axios'
+import { useState, useEffect } from 'react'
 // import { get } from 'mongoose';
-import Comment from './components/Comment';
-import Nav from './components/Nav';
-import SideBar from './components/SideBar';
+import Comment from './components/Comment'
+import Nav from './components/Nav'
+import SideBar from './components/SideBar'
+import SignIn from './pages/SignIn'
+import Register from './pages/Register'
 
 function App() {
-  const [issues, setIssues] = useState([]);
-  const [communities, setCommunities] = useState([]);
+  const [issues, setIssues] = useState([])
+  const [communities, setCommunities] = useState([])
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
-  const [searchTerm, setSearchTerm] = useState(''); // Manage search term state
+  const [searchTerm, setSearchTerm] = useState('') // Manage search term state
 
   const [user, setUser] = useState(null)
   const handleLogout = () => {
@@ -24,48 +26,91 @@ function App() {
 
   const getIssues = async () => {
     try {
-      let res = await axios.get('http://localhost:3001/issues');
-      console.log('Fetched issues:', res.data);
-      setIssues(res.data);
+      let res = await axios.get('http://localhost:3001/issues')
+      console.log('Fetched issues:', res.data)
+      setIssues(res.data)
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
-  };
-  
-  
+  }
+
   const getCommunities = async () => {
     try {
-      let res = await axios.get('http://localhost:3001/communities');
-      console.log('Fetched communities:', res.data); // Check the fetched data
-      setCommunities(res.data);
+      let res = await axios.get('http://localhost:3001/communities')
+      console.log('Fetched communities:', res.data) // Check the fetched data
+      setCommunities(res.data)
     } catch (err) {
-      console.error('Error fetching communities:', err);
+      console.error('Error fetching communities:', err)
     }
-  };
-  
+  }
 
   const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen); // Toggle sidebar open/close state
-  };
+    setIsSidebarOpen(!isSidebarOpen) // Toggle sidebar open/close state
+  }
 
   useEffect(() => {
-    getIssues();
+    getIssues()
     getCommunities()
-  }, []);
+  }, [])
 
   return (
     <div className="App">
-      <Nav user={user} handleLogout={handleLogout} toggleSidebar={toggleSidebar} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <SideBar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} communities={communities} />
+      <Nav
+        user={user}
+        handleLogout={handleLogout}
+        toggleSidebar={toggleSidebar}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+      />
+      <SideBar
+        isOpen={isSidebarOpen}
+        toggleSidebar={toggleSidebar}
+        communities={communities}
+      />
       <main className={isSidebarOpen ? 'shifted' : ''}>
         <Routes>
-          <Route path="/" element={<Home getIssues={getIssues} issues={issues} setIssues={setIssues} getCommunities={getCommunities} communities={communities} setCommunities={setCommunities} searchTerm={searchTerm} />} />
-          <Route path="/form" element={<Form getCommunities={getCommunities} communities={communities} setCommunities={setCommunities} />} /> {/* This should work */}
-          <Route path="/comment" element={<Comment getIssues={getIssues} issues={issues} setIssues={setIssues}  />} /> {/* This should work */}
+          <Route
+            path="/"
+            element={
+              <Home
+                getIssues={getIssues}
+                issues={issues}
+                setIssues={setIssues}
+                getCommunities={getCommunities}
+                communities={communities}
+                setCommunities={setCommunities}
+                searchTerm={searchTerm}
+              />
+            }
+          />
+          <Route
+            path="/form"
+            element={
+              <Form
+                getCommunities={getCommunities}
+                communities={communities}
+                setCommunities={setCommunities}
+              />
+            }
+          />{' '}
+          {/* This should work */}
+          <Route
+            path="/comment"
+            element={
+              <Comment
+                getIssues={getIssues}
+                issues={issues}
+                setIssues={setIssues}
+              />
+            }
+          />{' '}
+          <Route path="signIn" element={<SignIn />} />
+          <Route path="register" element={<Register />} />
+
         </Routes>
       </main>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
