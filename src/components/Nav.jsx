@@ -1,7 +1,13 @@
-import { Link } from 'react-router-dom';
-import Search from './Search';
+import { Link } from 'react-router-dom'
+import Search from './Search'
 
-const Nav = ({ user, handleLogout, toggleSidebar, searchTerm, setSearchTerm }) => {
+const Nav = ({
+  user,
+  handleLogout,
+  toggleSidebar,
+  searchTerm,
+  setSearchTerm
+}) => {
   const publicOptions = (
     <nav>
       <button className="toggler" onClick={toggleSidebar}>
@@ -12,15 +18,16 @@ const Nav = ({ user, handleLogout, toggleSidebar, searchTerm, setSearchTerm }) =
         <Link to="/form">Add Community</Link>
         <Link to="/comment">Comments</Link>
       </div>
-      <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} /> {/* Add Search Component */}
+      <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />{' '}
+      {/* Add Search Component */}
+      <div>
+        <Link to="/Register">Register</Link>
+        <Link to="/SignIn">Sign In</Link>
+      </div>
     </nav>
-  );
+  )
 
-  return (
-    <header>
-      {publicOptions}
-    </header>
-  );
-};
+  return <header>{publicOptions}</header>
+}
 
-export default Nav;
+export default Nav
