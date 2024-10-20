@@ -46,7 +46,7 @@ const SignIn = ({ user, setUser }) => {
             />
           </div>
           <button
-            onClick={<SignIn />}
+
             className="submit"
             disabled={!formValues.email || !formValues.password}
           >

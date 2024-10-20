@@ -104,9 +104,8 @@ function App() {
               />
             }
           />{' '}
-          <Route path="signIn" element={<SignIn />} />
-          <Route path="register" element={<Register />} />
-
+          <Route path="/signIn" element={<SignIn user={user} setUser={setUser} />} />
+          <Route path="/register" element={<Register user={user} setUser={setUser} />} />
         </Routes>
       </main>
     </div>

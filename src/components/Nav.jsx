@@ -18,9 +18,11 @@ const Nav = ({
       </button>
       <div>
         <h3>Welcome, {user ? user.name : 'Guest'}!</h3>
-      </div>
-      <div>
-        
+        {user && user.image ? (
+          <img src={user.image} alt={`${user.name}'s profile`} />
+        ) : (
+          <div>No image available</div>
+        )}
       </div>
       <div>
         <Link to="/">Home</Link>

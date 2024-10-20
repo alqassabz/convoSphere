@@ -10,14 +10,14 @@ const Register = () => {
     email: '',
     password: '',
     confirmPassword: '',
-    profilePicture: null
+    image: null
   }
   const [formValues, setFormValues] = useState(initialState)
   const [previewImage, setPreviewImage] = useState(null)
 
   const handleChange = (e) => {
-    if (e.target.name === 'profilePicture') {
-      setFormValues({ ...formValues, profilePicture: e.target.files[0] })
+    if (e.target.name === 'image') {
+      setFormValues({ ...formValues, image: e.target.files[0] })
       setPreviewImage(URL.createObjectURL(e.target.files[0]))
     } else {
       setFormValues({ ...formValues, [e.target.name]: e.target.value })
@@ -26,15 +26,8 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const formData = new FormData()
-    formData.append('name', formValues.name)
-    formData.append('email', formValues.email)
-    formData.append('password', formValues.password)
-    if (formValues.profilePicture) {
-      formData.append('profilePicture', formValues.profilePicture)
-    }
 
-    await RegisterUser(formData)
+    await RegisterUser(formValues)
     setFormValues(initialState)
     setPreviewImage(null)
     navigate('/signIn')
@@ -91,11 +84,11 @@ const Register = () => {
             />
           </div>
           <div className="input-wrapper">
-            <label htmlFor="profilePicture">Profile Picture</label>
+            <label htmlFor="image">Profile Picture</label>
             <input
               onChange={handleChange}
               type="file"
-              name="profilePicture"
+              name="image"
               accept="image/*"
             />
           </div>
