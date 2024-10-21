@@ -11,28 +11,35 @@ const Register = () => {
     email: '',
     password: '',
     confirmPassword: '',
-    image: null
+  
   }
   const [formValues, setFormValues] = useState(initialState)
   const [previewImage, setPreviewImage] = useState(null)
 
   const handleChange = (e) => {
+
     if (e.target.name === 'image') {
       console.log(e.target.files[0].name)
-      setFormValues({ ...formValues, image: e.target.files[0].name })
+
+      setFormValues({ ...formValues, image:e.target.files[0].name })
       setPreviewImage(URL.createObjectURL(e.target.files[0]))
     } else {
       setFormValues({ ...formValues, [e.target.name]: e.target.value })
     }
   }
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-
-    await RegisterUser(formValues)
+    const uplaoder = await RegisterUser(formValues, {headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })
     setFormValues(initialState)
     setPreviewImage(null)
     navigate('/signIn')
+
+
   }
 
   return (
