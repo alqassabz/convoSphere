@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { FaLessThanEqual } from 'react-icons/fa6'
 
-const Form = ({ getCommunities, communities, setCommunities }) => {
+const Form = ({ getCommunities, communities, setCommunities, user }) => {
   const navigate = useNavigate()
   const [iconValue, setIconValue] = useState('')
   const [name, setName] = useState('')
@@ -11,7 +11,7 @@ const Form = ({ getCommunities, communities, setCommunities }) => {
   const [description, setDescription] = useState('')
   const [selectedIcon, setSelectedIcon] = useState('')
   const [dropdownOpen, setDropdownOpen] = useState(false)
-  const [fields, setFields] = useState([{ name: '', description: '' }])
+  const [fields, setFields] = useState([{ name: 'General', description: 'A space for open discussions, sharing ideas, and connecting with fellow community members on a variety of topics.' }])
 
   const BASE_URL = 'http://localhost:3001'
   const images = [
@@ -43,7 +43,8 @@ const Form = ({ getCommunities, communities, setCommunities }) => {
       name,
       email,
       description,
-      fields
+      fields,
+      participants: {name: user.name, email:user.email}
     }
 
     try {

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { HiReply } from 'react-icons/hi';
+import { NavLink } from 'react-router-dom';
 
 const Home = ({
   getIssues,
@@ -9,7 +10,8 @@ const Home = ({
   getCommunities,
   communities,
   setCommunities,
-  searchTerm
+  searchTerm,
+  user
 }) => {
   const [filteredCommunities, setFilteredCommunities] = useState([]);
 
@@ -70,7 +72,9 @@ const Home = ({
                   <img src={`/public/${community.icon}.png`} alt={`${community.name} icon`} />
                 </div>
                 <h3>{community.name}</h3>
+                <div><button className='join-btn'>Join</button></div>
               </div>
+              
               <p className="description">{community.description}</p>
               <p className="creator">{community.email}</p>
             </div>

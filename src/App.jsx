@@ -80,6 +80,7 @@ function App() {
                 communities={communities}
                 setCommunities={setCommunities}
                 searchTerm={searchTerm}
+                user={user}
               />
             }
           />
@@ -90,6 +91,7 @@ function App() {
                 getCommunities={getCommunities}
                 communities={communities}
                 setCommunities={setCommunities}
+                user={user}
               />
             }
           />{' '}
