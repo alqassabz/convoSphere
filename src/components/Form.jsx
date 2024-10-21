@@ -7,7 +7,7 @@ const Form = ({ getCommunities, communities, setCommunities, user }) => {
   const navigate = useNavigate()
   const [iconValue, setIconValue] = useState('')
   const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
+  const [emails, setEmails] = useState('')
   const [description, setDescription] = useState('')
   const [selectedIcon, setSelectedIcon] = useState('')
   const [dropdownOpen, setDropdownOpen] = useState(false)
@@ -41,10 +41,11 @@ const Form = ({ getCommunities, communities, setCommunities, user }) => {
     const communityData = {
       icon: iconValue,
       name,
-      email,
+      creator: user.email,
+      emails,
       description,
       fields,
-      participants: {name: user.name, email:user.email}
+      participants: user
     }
 
     try {
@@ -133,12 +134,12 @@ const Form = ({ getCommunities, communities, setCommunities, user }) => {
       </div>
 
       <div className="form-group">
-        <label htmlFor="email">Special Invitations:</label>
+        <label htmlFor="emails">Special Invitations:</label>
         <input
           type="email"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          id="emails"
+          value={emails}
+          onChange={(e) => setEmails(e.target.value)}
           required
         />
       </div>
