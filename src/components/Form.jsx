@@ -3,15 +3,15 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { FaLessThanEqual } from 'react-icons/fa6'
 
-const Form = ({ getCommunities, communities, setCommunities }) => {
+const Form = ({ getCommunities, communities, setCommunities, user }) => {
   const navigate = useNavigate()
   const [iconValue, setIconValue] = useState('')
   const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
+  const [emails, setEmails] = useState('')
   const [description, setDescription] = useState('')
   const [selectedIcon, setSelectedIcon] = useState('')
   const [dropdownOpen, setDropdownOpen] = useState(false)
-  const [fields, setFields] = useState([{ name: '', description: '' }])
+  const [fields, setFields] = useState([{ name: 'General', description: 'A space for open discussions, sharing ideas, and connecting with fellow community members on a variety of topics.' }])
 
   const BASE_URL = 'http://localhost:3001'
   const images = [
@@ -41,19 +41,17 @@ const Form = ({ getCommunities, communities, setCommunities }) => {
     const communityData = {
       icon: iconValue,
       name,
-      email,
+      creator: user.email,
+      emails,
       description,
-      fields
+      fields,
+      participants: user
     }
 
     try {
       console.log(communityData.fields)
       await axios.post(`${BASE_URL}/communities`, communityData)
       navigate('/')
-      // if (response.status === 200) {
-      //   const newCommunity = response.data;
-      //   setCommunities([...communities, newCommunity]);
-      // }
     } catch (error) {
       console.error('Error creating community:', error)
     }
@@ -132,12 +130,12 @@ const Form = ({ getCommunities, communities, setCommunities }) => {
       </div>
 
       <div className="form-group">
-        <label htmlFor="email">Special Invitations:</label>
+        <label htmlFor="emails">Special Invitations:</label>
         <input
           type="email"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          id="emails"
+          value={emails}
+          onChange={(e) => setEmails(e.target.value)}
           required
         />
       </div>

@@ -10,6 +10,8 @@ import Nav from './components/Nav'
 import SideBar from './components/SideBar'
 import SignIn from './pages/SignIn'
 import Register from './pages/Register'
+import Details from './components/Details'
+
 
 function App() {
   const [issues, setIssues] = useState([])
@@ -80,6 +82,7 @@ function App() {
                 communities={communities}
                 setCommunities={setCommunities}
                 searchTerm={searchTerm}
+                user={user}
               />
             }
           />
@@ -90,6 +93,7 @@ function App() {
                 getCommunities={getCommunities}
                 communities={communities}
                 setCommunities={setCommunities}
+                user={user}
               />
             }
           />{' '}
@@ -106,6 +110,7 @@ function App() {
           />{' '}
           <Route path="/signIn" element={<SignIn user={user} setUser={setUser} />} />
           <Route path="/register" element={<Register user={user} setUser={setUser} />} />
+          <Route path="/listings/:id" element={<Details communities={communities} user={user} />} />
         </Routes>
       </main>
     </div>

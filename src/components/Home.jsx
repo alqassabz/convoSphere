@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { HiReply } from 'react-icons/hi';
+import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom'
 
 const Home = ({
   getIssues,
@@ -9,14 +11,19 @@ const Home = ({
   getCommunities,
   communities,
   setCommunities,
-  searchTerm
+  searchTerm,
+  user,
 }) => {
+
+    const BASE_URL = 'http://localhost:3001'
   const [filteredCommunities, setFilteredCommunities] = useState([]);
 
   // Fetch communities on component mount
   useEffect(() => {
     getCommunities();
   }, []);
+
+  console.log(user)
 
   // Filter communities based on the search term whenever communities or searchTerm change
   useEffect(() => {
@@ -31,6 +38,8 @@ const Home = ({
       setFilteredCommunities([]);
     }
   }, [searchTerm, communities]);
+
+  
 
   return (
     <>
@@ -64,6 +73,7 @@ const Home = ({
       <div className='boxes'>
         {filteredCommunities.length > 0 ? (
           filteredCommunities.map((community) => (
+            <Link to={`/listings/${community._id}`}>
             <div className='box' key={community._id}>
               <div className="box-header">
                 <div className='community-icon'>
@@ -72,8 +82,9 @@ const Home = ({
                 <h3>{community.name}</h3>
               </div>
               <p className="description">{community.description}</p>
-              <p className="creator">{community.email}</p>
+              <p className="creator">Created by: {community.creator}</p>
             </div>
+            </Link>
           ))
         ) : (
           <p>No communities found.</p>
