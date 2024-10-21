@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { HiReply } from 'react-icons/hi';
+import { Link } from 'react-router-dom';
 
 const Home = ({
   getIssues,
@@ -64,6 +65,7 @@ const Home = ({
       <div className='boxes'>
         {filteredCommunities.length > 0 ? (
           filteredCommunities.map((community) => (
+            <Link to={`/listings/${community._id}`}>
             <div className='box' key={community._id}>
               <div className="box-header">
                 <div className='community-icon'>
@@ -74,6 +76,7 @@ const Home = ({
               <p className="description">{community.description}</p>
               <p className="creator">{community.email}</p>
             </div>
+            </Link>
           ))
         ) : (
           <p>No communities found.</p>

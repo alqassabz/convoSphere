@@ -237,6 +237,11 @@ textarea {
   flex-direction: column;
   align-items: center;
   text-align: center;
+  text-decoration: none;
+}
+
+a{
+  text-decoration: none;
 }
 
 /* Hover effect for the box */
@@ -710,6 +715,7 @@ main.shifted {
   margin-right: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  margin-bottom: 20px;
 }
 
 .add-button {
@@ -747,4 +753,111 @@ main.shifted {
   height: auto;           /* Avoid fixed height */
   width: 100%;            /* Make the form responsive */
   padding: 20px;
+}
+
+
+
+/* For the community details container */
+.detail {
+  background-color: #0a1d2c; /* Dark blue background */
+  color: #fff; /* White text for readability */
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 900px;
+  margin: 2rem auto;
+}
+
+.detail img {
+  border-radius: 10px;
+}
+
+/* Header of the details section */
+.detail-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+/* Image/icon styles */
+.detail-header img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10%; /* Rounded icon */
+}
+
+/* Title and description */
+.listing-name h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.listing-name p {
+  font-size: 1rem;
+  color: #bbb; /* Light gray for description */
+}
+
+/* Info section */
+.info-wrapper {
+  margin-top: 1.5rem;
+}
+
+.listing-header h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.listing-header h3 {
+  margin: 0.5rem 0;
+  font-size: 1.2rem;
+  color: #f0f0f0; /* Light text */
+}
+
+/* Back button styling */
+.goBack {
+  background-color: #ff9e00;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-top: 1.5rem;
+}
+
+.goBack:hover {
+  background-color: #ff7a00;
+}
+
+.goBack a {
+  color: #fff;
+  text-decoration: none;
+}
+
+
+.sections {
+  background-color: #02162c;
+  box-shadow: #246fa9;
+  padding: 10px 50px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.viewComments-btn {
+  background-color: #072b53;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  
+}
+
+.viewComments-btn a{
+  text-decoration: none;
+  color: white;
 }

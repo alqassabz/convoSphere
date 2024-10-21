@@ -11,7 +11,7 @@ const Form = ({ getCommunities, communities, setCommunities }) => {
   const [description, setDescription] = useState('')
   const [selectedIcon, setSelectedIcon] = useState('')
   const [dropdownOpen, setDropdownOpen] = useState(false)
-  const [fields, setFields] = useState([{ name: '', description: '' }])
+  const [fields, setFields] = useState([{ name: 'General', description: 'A space for open discussions, sharing ideas, and connecting with fellow community members on a variety of topics.' }])
 
   const BASE_URL = 'http://localhost:3001'
   const images = [

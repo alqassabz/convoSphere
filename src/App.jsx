@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react';
 import Comment from './components/Comment';
 import Nav from './components/Nav';
 import SideBar from './components/SideBar';
+import Details from './components/Details'
 
 function App() {
   const [issues, setIssues] = useState([]);
@@ -62,6 +63,7 @@ function App() {
           <Route path="/" element={<Home getIssues={getIssues} issues={issues} setIssues={setIssues} getCommunities={getCommunities} communities={communities} setCommunities={setCommunities} searchTerm={searchTerm} />} />
           <Route path="/form" element={<Form getCommunities={getCommunities} communities={communities} setCommunities={setCommunities} />} /> {/* This should work */}
           <Route path="/comment" element={<Comment getIssues={getIssues} issues={issues} setIssues={setIssues}  />} /> {/* This should work */}
+          <Route path="/listings/:id" element={<Details communities={communities} />} />
         </Routes>
       </main>
     </div>
