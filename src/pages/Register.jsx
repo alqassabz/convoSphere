@@ -17,11 +17,12 @@ const Register = () => {
   const [previewImage, setPreviewImage] = useState(null)
 
   const handleChange = (e) => {
+    
 
     if (e.target.name === 'image') {
       console.log(e.target.files[0].name)
 
-      setFormValues({ ...formValues, image:e.target.files[0].name })
+      setFormValues({ ...formValues, image:e.target.files[0] })
       setPreviewImage(URL.createObjectURL(e.target.files[0]))
     } else {
       setFormValues({ ...formValues, [e.target.name]: e.target.value })
