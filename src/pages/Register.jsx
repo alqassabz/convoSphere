@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { RegisterUser } from '../services/Auth'
 
-
 const Register = () => {
   let navigate = useNavigate()
 
@@ -10,37 +9,35 @@ const Register = () => {
     name: '',
     email: '',
     password: '',
-    confirmPassword: '',
-  
+    confirmPassword: ''
   }
   const [formValues, setFormValues] = useState(initialState)
   const [previewImage, setPreviewImage] = useState(null)
 
   const handleChange = (e) => {
-    
-
     if (e.target.name === 'image') {
       console.log(e.target.files[0].name)
 
-      setFormValues({ ...formValues, image:e.target.files[0] })
+      setFormValues({ ...formValues, image: e.target.files[0] })
       setPreviewImage(URL.createObjectURL(e.target.files[0]))
     } else {
       setFormValues({ ...formValues, [e.target.name]: e.target.value })
     }
   }
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const uplaoder = await RegisterUser(formValues, {headers: {
-      'Content-Type': 'multipart/form-data'
-    }
-  })
+    const formData = new FormData()
+    formData.append('image', formValues.image)
+    // Object.entries(formValues).forEach((value) => {
+    //   console.log(value)
+    //   console.log(formData)
+    // })
+    // return
+    await RegisterUser(formValues)
     setFormValues(initialState)
     setPreviewImage(null)
     navigate('/signIn')
-
-
   }
 
   return (
@@ -49,7 +46,7 @@ const Register = () => {
         <form
           className="col"
           onSubmit={handleSubmit}
-          encType="multipart/form-data"
+          // encType="multipart/form-data"
         >
           <div className="input-wrapper">
             <label htmlFor="name">Username</label>
