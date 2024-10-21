@@ -52,10 +52,6 @@ const Form = ({ getCommunities, communities, setCommunities, user }) => {
       console.log(communityData.fields)
       await axios.post(`${BASE_URL}/communities`, communityData)
       navigate('/')
-      // if (response.status === 200) {
-      //   const newCommunity = response.data;
-      //   setCommunities([...communities, newCommunity]);
-      // }
     } catch (error) {
       console.error('Error creating community:', error)
     }

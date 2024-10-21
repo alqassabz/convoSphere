@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { RegisterUser } from '../services/Auth'
 
+
 const Register = () => {
   let navigate = useNavigate()
 
@@ -17,7 +18,8 @@ const Register = () => {
 
   const handleChange = (e) => {
     if (e.target.name === 'image') {
-      setFormValues({ ...formValues, image: e.target.files[0] })
+      console.log(e.target.files[0].name)
+      setFormValues({ ...formValues, image: e.target.files[0].name })
       setPreviewImage(URL.createObjectURL(e.target.files[0]))
     } else {
       setFormValues({ ...formValues, [e.target.name]: e.target.value })
