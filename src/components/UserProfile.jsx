@@ -1,114 +1,49 @@
-import axios from "axios";
-import { useEffect, useState } from "react"
-import { IoTimeSharp } from "react-icons/io5";
+import axios from 'axios'
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
-const UserProfile =  () =>{
-      const [user, setUser] = useState([]);
-      const [isFollowing, setIsFollowing] = useState()
+const UserProfile = () => {
+  const { id } = useParams()
+  const [user, setUser] = useState(null)
+  const [isFollowing, setIsFollowing] = useState(false)
 
-     
-      
-      useEffect(()=>{
-        
-        const getUser = async () =>{
-          const token = localStorage.getItem('token')
-          try{
-            const response = await axios.get(`http://localhost:3001/auth/user`, {
-              headers: {
-                Authorization: `Bearer ${token}`, // Pass the token in the Authorization header
-              },
-            });
-            setUser(response.data.user)
-            console.log(response.data.user)
-            
-          }catch (error){
-            console.error('Error fetching items:', error)
-            
-          }
-          
-        }
-        getUser()
-        
-      },[])
-
-
-  const handleFollow = async () => {
-    const token = localStorage.getItem('token');
-    
-    if (!token) {
-      console.error('No token found');
-      return;
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3001/auth/user/${id}`
+        )
+        setUser(response.data.data)
+        console.log('testing user data', response.data)
+      } catch (error) {
+        console.error('Error fetching user:', error)
+      }
     }
 
-    try {
-      const response = await axios.post(`http://localhost:3001/auth/${user.id}/follow`, {}, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setUser(response.data.user);
-      setIsFollowing(true); // Update local state
-    } catch (error) {
-      console.error('Error following user:', error);
-    }
-  };
+    getUser()
+  }, [id])
 
-  const handleUnfollow = async () => {
-    const token = localStorage.getItem('token');
-    
-    if (!token) {
-      console.error('No token found');
-      return;
-    }
-
-    try {
-      const response = await axios.post(`http://localhost:3001/auth/${user.id}/unfollow`, {}, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setUser(response.data.user);
-      setIsFollowing(false); // Update local state
-    } catch (error) {
-      console.error('Error unfollowing user:', error);
-    }
-  };
-
-
-
-
-      return (
-        <>
-        <div className="user-container">
+  return (
+    <div className="user-container">
+      {user ? (
         <div className="user-details">
           <h1 className="user-name">{user.name}</h1>
-          <img className="user-image" src={user.image} alt={user.name} />
+          <img className="profile-image" src={`http://localhost:3001${user.image}`} alt={user.name} />
           <p className="user-info">Email: {user.email}</p>
-          <p className="user-info">Followers: {user.followers}</p>
-          <p className="user-info">Following: {user.following}</p>
-          <button className="follow-button" onClick={isFollowing ? handleUnfollow : handleFollow}>
+          <p className="user-info">Followers: {user.followers.length}</p>
+          <p className="user-info">Following: {user.following.length}</p>
+          {/* <button
+            className="follow-button"
+            onClick={isFollowing ? handleUnfollow : handleFollow}
+          >
             {isFollowing ? 'Unfollow' : 'Follow'}
-          </button>
+          </button> */}
         </div>
-      
+      ) : (
+        <p>Loading user information...</p>
+      )}
     </div>
-  
-
-         
-          
-
-
-
-        
-        
-        
-        </>
-      )
-
-
-
-
-
+  )
 }
 
 export default UserProfile

@@ -39,7 +39,7 @@ const Nav = ({
       <div>
       {user ? (
           <>
-          <Link to="/user">User Profile</Link>
+          <Link to={`/user/${user.id}`}>User Profile</Link>
           <Link onClick={handleLogout}>Sign Out</Link>
           </>
         ) : (

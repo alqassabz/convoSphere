@@ -1,5 +1,5 @@
 import './App.css'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useParams } from 'react-router-dom'
 import Home from './components/Home'
 import Form from './components/Form' // Correct import
 import axios from 'axios'
@@ -71,7 +71,7 @@ function App() {
         communities={communities}
       />
       <RightSideBar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-      
+
       <main className={isSidebarOpen ? 'shifted' : ''}>
         <Routes>
           <Route
@@ -111,7 +111,7 @@ function App() {
               />
             }
           />{' '}
-          <Route path="/user"element={<UserProfile />} />
+          <Route path="/user/:id" element={<UserProfile />} />
           <Route
             path="/signIn"
             element={<SignIn user={user} setUser={setUser} />}
