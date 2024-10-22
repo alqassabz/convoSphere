@@ -52,16 +52,19 @@ const CommunityDetails = ({ communities, user }) => {
         <div className="listing-name">
           <h1>{community.name}</h1>
           <p>{community.description}</p>
+          {community.participants.findIndex(participant => participant.id === user.id) ? (
           <div>
             <Link to="#" onClick={handleJoin}>
               Join Community
             </Link>
           </div>
+          ):(
           <div>
           <Link to="#" onClick={handleUnjoin}>
               Unjoin Community
             </Link>
           </div>
+          )}
         </div>
       </div>
 
