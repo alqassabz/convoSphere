@@ -11,7 +11,8 @@ import SideBar from './components/SideBar'
 import SignIn from './pages/SignIn'
 import Register from './pages/Register'
 import Details from './components/Details'
-
+import UserProfile from './components/UserProfile'
+import RightSideBar from './components/RightSideBar'
 
 function App() {
   const [issues, setIssues] = useState([])
@@ -69,6 +70,8 @@ function App() {
         toggleSidebar={toggleSidebar}
         communities={communities}
       />
+      <RightSideBar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+      
       <main className={isSidebarOpen ? 'shifted' : ''}>
         <Routes>
           <Route
@@ -108,9 +111,19 @@ function App() {
               />
             }
           />{' '}
-          <Route path="/signIn" element={<SignIn user={user} setUser={setUser} />} />
-          <Route path="/register" element={<Register user={user} setUser={setUser} />} />
-          <Route path="/listings/:id" element={<Details communities={communities} user={user} />} />
+          <Route path="/user"element={<UserProfile />} />
+          <Route
+            path="/signIn"
+            element={<SignIn user={user} setUser={setUser} />}
+          />
+          <Route
+            path="/register"
+            element={<Register user={user} setUser={setUser} />}
+          />
+          <Route
+            path="/listings/:id"
+            element={<Details communities={communities} user={user} />}
+          />
         </Routes>
       </main>
     </div>
