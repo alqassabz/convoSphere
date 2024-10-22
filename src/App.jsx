@@ -1,5 +1,9 @@
 import './App.css'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+
+import { Route, Routes, useParams } from 'react-router-dom'
+
+import { BrowserRouter } from 'react-router-dom'
+
 import Home from './components/Home'
 import Form from './components/Form' // Correct import
 import axios from 'axios'
@@ -142,13 +146,17 @@ function App() {
             }
           />{' '}
 
+          <Route path="/user/:id" element={<UserProfile />} />
+
+
           <Route path="/signIn" element={<SignIn user={user} setUser={setUser} />} />
           <Route path="/register" element={<Register user={user} setUser={setUser} />} />
           <Route path="/listings/:id" element={<Details communities={communities} user={user} />} />
           <Route path="community/update/:id" element={<Update communities={communities} user={user} />} />
 
-          <Route path="/user" element={<UserProfile />} />
+         
           
+
         </Routes>
       </main>
     </div>
