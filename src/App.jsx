@@ -11,6 +11,7 @@ import SideBar from './components/SideBar'
 import SignIn from './pages/SignIn'
 import Register from './pages/Register'
 import Details from './components/Details'
+import UserProfile from './components/UserProfile'
 
 
 function App() {
@@ -108,6 +109,7 @@ function App() {
               />
             }
           />{' '}
+          <Route path="/user"element={<UserProfile />} />
           <Route path="/signIn" element={<SignIn user={user} setUser={setUser} />} />
           <Route path="/register" element={<Register user={user} setUser={setUser} />} />
           <Route path="/listings/:id" element={<Details communities={communities} user={user} />} />
