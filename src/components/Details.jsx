@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link, NavLink } from 'react-router-dom'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const CommunityDetails = ({ communities, user }) => {
+  const navigate = useNavigate()
   let { id } = useParams()
   const [community, setCommunity] = useState(null)
 
@@ -19,6 +21,7 @@ const CommunityDetails = ({ communities, user }) => {
       console.error('Error joining community:', err)
     }
   }
+  
 
   const handleUnjoin = async () => {
     try {
@@ -34,6 +37,12 @@ const CommunityDetails = ({ communities, user }) => {
     }
   }
 
+  const handleDelete = async ()  =>{
+    const deleteUrl = `http://localhost:3001/community/${community._id}`
+    await axios.delete(deleteUrl, user)
+    navigate("/")
+  }
+
   useEffect(() => {
     const selectedCommunity = communities.find(
       (community) => community._id === id
@@ -41,7 +50,7 @@ const CommunityDetails = ({ communities, user }) => {
     setCommunity(selectedCommunity)
   }, [communities, id])
 
-  return community ? (
+  return user && community ? (
     <div className="detail">
       <div className="detail-header">
         <img
@@ -52,15 +61,24 @@ const CommunityDetails = ({ communities, user }) => {
         <div className="listing-name">
           <h1>{community.name}</h1>
           <p>{community.description}</p>
+          {community.participants.findIndex(participant => participant.id === user.id) ? (
           <div>
             <Link to="#" onClick={handleJoin}>
               Join Community
             </Link>
           </div>
+          ):(
           <div>
           <Link to="#" onClick={handleUnjoin}>
               Unjoin Community
             </Link>
+          </div>
+          )}
+          <div>
+          <Link to="#" onClick={handleDelete}>
+              Delete Community
+            </Link>
+            <Link to={`/community/update/${id}`}>update</Link>
           </div>
         </div>
       </div>
@@ -76,7 +94,7 @@ const CommunityDetails = ({ communities, user }) => {
               </div>
               <div>
                 <button className="viewComments-btn">
-                  <NavLink to="/comment">View Comments</NavLink>
+                  <NavLink to={`/comment/${field._id}`}>View Comments</NavLink>
                 </button>
               </div>
             </div>
@@ -88,7 +106,7 @@ const CommunityDetails = ({ communities, user }) => {
         <NavLink to="/">Back</NavLink>
       </button>
     </div>
-  ) : null
+  ) : navigate('/register')
 }
 
 export default CommunityDetails
