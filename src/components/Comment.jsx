@@ -11,19 +11,34 @@ const Comment = ({ getIssues, issues, setIssues }) => {
   const initialState = { comment: '' } // Define initial state
   const [formState, setFormState] = useState(initialState)
 
+  // Function to fetch comments
+  const fetchComments = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/comments/section/${sectionId}`
+      )
+      setIssues(response.data) // Update state with fetched issues
+    } catch (err) {
+      console.error('Error fetching comments:', err)
+    }
+  }
+
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:3001/comments/section/${sectionId}`
-        )
-        setIssues(response.data) // Assume response data contains comments for that section
+        const response = await axios.get(`http://localhost:3001/comments/section/${sectionId}`);
+        setIssues(response.data);
       } catch (err) {
-        console.error(err)
+        console.error('Error fetching comments:', err);
       }
+    };
+  
+    // Check if sectionId is valid before fetching
+    if (sectionId) {
+      fetchComments();
     }
-    fetchComments()
-  }, [sectionId, setIssues])
+  }, [sectionId]);
+  
 
   const submitReply = async (issueId) => {
     if (!replies[issueId]?.trim()) return
@@ -38,14 +53,14 @@ const Comment = ({ getIssues, issues, setIssues }) => {
       setIssues((prevIssues) =>
         prevIssues.map((issue) =>
           issue._id === issueId
-            ? { ...issue, replies: res.data.replies }
+            ? { ...issue, replies: [...issue.replies, res.data.reply] }
             : issue
         )
       )
       setReplies((prevReplies) => ({ ...prevReplies, [issueId]: '' }))
       setShowReplyInput((prev) => ({ ...prev, [issueId]: false }))
     } catch (err) {
-      console.error(err)
+      console.error('Error submitting reply:', err)
     }
   }
 
@@ -56,14 +71,14 @@ const Comment = ({ getIssues, issues, setIssues }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      let response = await axios.post('http://localhost:3001/issues', {
+      const response = await axios.post('http://localhost:3001/issues', {
         ...formState,
         sectionId
-      }) // Send sectionId with the new comment
-      setIssues([...issues, response.data])
-      setFormState(initialState)
+      })
+      setIssues((prevIssues) => [...prevIssues, response.data]) // Update state with new issue
+      setFormState(initialState) // Reset form after submission
     } catch (err) {
-      console.error(err)
+      console.error('Error submitting comment:', err)
     }
   }
 
@@ -78,7 +93,6 @@ const Comment = ({ getIssues, issues, setIssues }) => {
               <p className="card-footer text-muted">
                 <small>{new Date(issue.createdAt).toDateString()}</small>
               </p>
-
               <div
                 className="reply-icon"
                 onClick={() =>
@@ -91,24 +105,25 @@ const Comment = ({ getIssues, issues, setIssues }) => {
                 <HiReply />
               </div>
             </div>
-
             <div className="replies-container">
               {issue.replies && issue.replies.length > 0 ? (
-                <h5>Replies:</h5>
+                <>
+                  <h5>Replies:</h5>
+                  {issue.replies.map((reply, index) => (
+                    <div key={index} className="reply">
+                      <p>
+                        {reply.comment} -{' '}
+                        <small>
+                          {new Date(reply.createdAt).toDateString()}
+                        </small>
+                      </p>
+                    </div>
+                  ))}
+                </>
               ) : (
                 <p>No replies yet.</p>
               )}
-              {issue.replies &&
-                issue.replies.map((reply, index) => (
-                  <div key={index} className="reply">
-                    <p>
-                      {reply.comment} -{' '}
-                      <small>{new Date(reply.createdAt).toDateString()}</small>
-                    </p>
-                  </div>
-                ))}
             </div>
-
             {showReplyInput[issue._id] && (
               <div className="reply-form">
                 <input
@@ -118,7 +133,7 @@ const Comment = ({ getIssues, issues, setIssues }) => {
                     setReplies({ ...replies, [issue._id]: e.target.value })
                   }
                   placeholder="Write a reply..."
-                  style={{ width: '80%', marginTop: '5px' }} // Adjust the width as needed
+                  style={{ width: '80%', marginTop: '5px' }}
                 />
                 <button onClick={() => submitReply(issue._id)}>Submit</button>
               </div>
@@ -126,7 +141,6 @@ const Comment = ({ getIssues, issues, setIssues }) => {
           </div>
         ))}
       </div>
-
       <div>
         <form onSubmit={handleSubmit}>
           <label className="comment-label" htmlFor="comment">
@@ -139,7 +153,7 @@ const Comment = ({ getIssues, issues, setIssues }) => {
             onChange={handleChange}
             value={formState.comment}
             className="textarea"
-          ></textarea>
+          />
           <button className="comment-btn" type="submit">
             Send
           </button>
