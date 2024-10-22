@@ -873,6 +873,88 @@ main.shifted {
   opacity: 1;
 }
 
+.rightSidebar {
+  position: fixed; /* Keeps the sidebar in place */
+  top: 60px; /* Below the navbar */
+  right: 0; /* Align to the right */
+  width: 200px; /* Set the width to be smaller */
+  height: calc(100% - 60px); /* Full height minus the navbar */
+  background-color: #333; /* Background color */
+  color: white; /* Text color */
+  transform: translateX(100%); /* Hidden by default */
+  transition: transform 0.3s ease; /* Smooth transition */
+  z-index: 1000; /* Make sure it appears above other content */
+}
+
+.rightSidebar.open {
+  transform: translateX(0); /* Move into view when open */
+}
+
+.rightSidebar-content {
+  padding: 10px; /* Padding for inner content */
+  overflow-y: auto; /* Enable scrolling if content is too tall */
+}
+
+.rightSidebar ul {
+  list-style: none; /* Remove default list style */
+  padding: 0; /* Remove padding */
+}
+
+.rightSidebar ul li {
+  padding: 10px; /* Spacing for each list item */
+}
+
+.rightSidebar ul li a {
+  color: white; /* Link color */
+  text-decoration: none; /* Remove underline from links */
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  position: absolute;
+  top: 10px; /* Adjusted position */
+  right: 10px; /* Adjusted position */
+  color: #fff; /* Close button color */
+}
+
+/* Add this to your CSS file */
+
+.rightSidebar {
+  /* existing styles */
+}
+
+.following-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  padding: 10px;
+}
+
+.following-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.friend-name {
+  margin-top: 5px;
+  font-size: 12px;
+  text-align: center;
+}
+
 
 
 

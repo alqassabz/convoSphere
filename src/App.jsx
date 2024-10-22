@@ -1,5 +1,5 @@
 import './App.css'
-import { Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './components/Home'
 import Form from './components/Form' // Correct import
 import axios from 'axios'
@@ -11,8 +11,13 @@ import SideBar from './components/SideBar'
 import SignIn from './pages/SignIn'
 import Register from './pages/Register'
 import Details from './components/Details'
+
 import Update from './components/Update'
 import { CheckSession } from './services/Auth'
+
+
+import UserProfile from './components/UserProfile'
+import RightSideBar from './components/RightSideBar'
 
 
 function App() {
@@ -85,6 +90,8 @@ function App() {
         toggleSidebar={toggleSidebar}
         communities={communities}
       />
+      <RightSideBar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+
       <main className={isSidebarOpen ? 'shifted' : ''}>
         <Routes>
           <Route
@@ -99,6 +106,16 @@ function App() {
                 setCommunities={setCommunities}
                 searchTerm={searchTerm}
                 user={user}
+              />
+            }
+          />
+          <Route
+            path="/comment/:sectionId"
+            element={
+              <Comment
+                getIssues={getIssues}
+                issues={issues}
+                setIssues={setIssues}
               />
             }
           />
@@ -124,10 +141,14 @@ function App() {
               />
             }
           />{' '}
+
           <Route path="/signIn" element={<SignIn user={user} setUser={setUser} />} />
           <Route path="/register" element={<Register user={user} setUser={setUser} />} />
           <Route path="/listings/:id" element={<Details communities={communities} user={user} />} />
           <Route path="community/update/:id" element={<Update communities={communities} user={user} />} />
+
+          <Route path="/user" element={<UserProfile />} />
+          
         </Routes>
       </main>
     </div>
