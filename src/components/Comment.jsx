@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom' // Import useParams
 import axios from 'axios'
 import { HiReply } from 'react-icons/hi'
 
+
 const Comment = ({ getIssues, issues, setIssues }) => {
   const { sectionId } = useParams() // Get section ID from URL
   const [replies, setReplies] = useState({}) // Track replies per issue
@@ -24,6 +25,7 @@ const Comment = ({ getIssues, issues, setIssues }) => {
     }
     fetchComments()
   }, [sectionId, setIssues])
+
 
   const submitReply = async (issueId) => {
     if (!replies[issueId]?.trim()) return
@@ -52,6 +54,11 @@ const Comment = ({ getIssues, issues, setIssues }) => {
   const handleChange = (event) => {
     setFormState({ ...formState, [event.target.id]: event.target.value })
   }
+
+
+  useEffect(() => {
+    getIssues();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault()
