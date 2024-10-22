@@ -25,6 +25,8 @@ const Home = ({
 
   console.log(user)
 
+  
+
   // Filter communities based on the search term whenever communities or searchTerm change
   useEffect(() => {
     // Only filter if communities have been loaded

@@ -20,6 +20,20 @@ const CommunityDetails = ({ communities, user }) => {
     }
   }
 
+  const handleUnjoin = async () => {
+    try {
+      if (community && user) {
+        const joinUrl = `http://localhost:3001/community/unjoin/${community._id}`
+        await axios.put(joinUrl, user)
+        alert('You have successfully unjoined the community!')
+      } else {
+        alert('User or community information is missing.')
+      }
+    } catch (err) {
+      console.error('Error unjoining community:', err)
+    }
+  }
+
   useEffect(() => {
     const selectedCommunity = communities.find(
       (community) => community._id === id
@@ -41,6 +55,11 @@ const CommunityDetails = ({ communities, user }) => {
           <div>
             <Link to="#" onClick={handleJoin}>
               Join Community
+            </Link>
+          </div>
+          <div>
+          <Link to="#" onClick={handleUnjoin}>
+              Unjoin Community
             </Link>
           </div>
         </div>
