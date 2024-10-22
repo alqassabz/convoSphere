@@ -7,7 +7,7 @@ const Comment = ({getIssues,
   setIssues}) =>{
   const [replies, setReplies] = useState({}); // Track replies per issue
   const [showReplyInput, setShowReplyInput] = useState({}); // Track which reply input is shown
-
+    console.log(getIssues)
   const initialState = { comment: '' }; // Define initial state
   const [formState, setFormState] = useState(initialState);
 
@@ -39,6 +39,11 @@ const Comment = ({getIssues,
   const handleChange = (event) => {
     setFormState({ ...formState, [event.target.id]: event.target.value });
   };
+
+
+  useEffect(() => {
+    getIssues();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

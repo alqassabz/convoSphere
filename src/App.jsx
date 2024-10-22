@@ -30,8 +30,9 @@ function App() {
 
   const getIssues = async () => {
     try {
-      let res = await axios.get('http://localhost:3001/comment')
+      let res = await axios.get('http://localhost:3001/issue')
       console.log('Fetched comments:', res.data)
+      console.log(res.data)
       setIssues(res.data)
     } catch (err) {
       console.log(err)
