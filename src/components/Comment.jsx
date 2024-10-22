@@ -12,32 +12,36 @@ const Comment = ({ getIssues, issues, setIssues }) => {
   const [formState, setFormState] = useState(initialState)
 
   // Function to fetch comments
-  const fetchComments = async () => {
-    try {
-      const response = await axios.get(
-        `http://localhost:3001/comments/section/${sectionId}`
-      )
-      setIssues(response.data) // Update state with fetched issues
-    } catch (err) {
-      console.error('Error fetching comments:', err)
-    }
-  }
+  // const fetchComments = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       `http://localhost:3001/comments/section/${sectionId}`
+  //     )
+  //     setIssues(response.data) // Update state with fetched issues
+  //   } catch (err) {
+  //     console.error('Error fetching comments:', err)
+  //   }
+  // }
 
   useEffect(() => {
+    console.log('Effect triggered - sectionId:', sectionId); // Log sectionId
     const fetchComments = async () => {
       try {
         const response = await axios.get(`http://localhost:3001/comments/section/${sectionId}`);
+        console.log('Fetched comments:', response.data); // Log the response
         setIssues(response.data);
       } catch (err) {
         console.error('Error fetching comments:', err);
       }
     };
   
-    // Check if sectionId is valid before fetching
     if (sectionId) {
       fetchComments();
+    } else {
+      console.warn('No sectionId available to fetch comments.');
     }
   }, [sectionId]);
+  
   
 
   const submitReply = async (issueId) => {

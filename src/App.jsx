@@ -75,7 +75,7 @@ function App() {
     if (token) {
       checkToken()
     }
-    getIssues()
+    // getIssues()
     getCommunities()
     
   }, [])
