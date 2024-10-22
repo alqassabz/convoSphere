@@ -12,6 +12,7 @@ import SignIn from './pages/SignIn'
 import Register from './pages/Register'
 import Details from './components/Details'
 import Update from './components/Update'
+import { CheckSession } from './services/Auth'
 
 
 function App() {
@@ -51,9 +52,22 @@ function App() {
     setIsSidebarOpen(!isSidebarOpen) // Toggle sidebar open/close state
   }
 
+  const checkToken = async () => {
+    //If a token exists, sends token to localStorage to persist logged in user
+    const user = await CheckSession()
+    console.log(user)
+    setUser(user.data)
+  }
+
   useEffect(() => {
+    const token = localStorage.getItem('token')
+
+    if (token) {
+      checkToken()
+    }
     getIssues()
     getCommunities()
+    
   }, [])
 
   return (
