@@ -50,7 +50,7 @@ const Form = ({ getCommunities, communities, setCommunities, user }) => {
 
     try {
       console.log(communityData.fields)
-      await axios.post(`${BASE_URL}/communities`, communityData)
+      await axios.post(`${BASE_URL}/community`, communityData)
       navigate('/')
     } catch (error) {
       console.error('Error creating community:', error)

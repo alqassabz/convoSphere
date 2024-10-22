@@ -30,7 +30,7 @@ const CommunityDetails = ({ communities, user }) => {
         alert('User or community information is missing.')
       }
     } catch (err) {
-      console.error('Error unjoining community:', err)
+      console.log(err)
     }
   }
 
