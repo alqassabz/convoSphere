@@ -78,6 +78,7 @@ const CommunityDetails = ({ communities, user }) => {
           <Link to="#" onClick={handleDelete}>
               Delete Community
             </Link>
+            <Link to={`/community/update/${id}`}>update</Link>
           </div>
         </div>
       </div>

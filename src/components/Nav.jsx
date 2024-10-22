@@ -34,7 +34,6 @@ const Nav = ({
         <Link to="/">Home</Link>
         <Link to="/form">Add Community</Link>
         <Link to="/comment">Comments</Link>
-        <Link to="/community/update/671795b0a949301fad35de3d">update</Link>
       </div>
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <div>
