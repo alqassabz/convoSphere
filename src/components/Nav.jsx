@@ -31,8 +31,11 @@ const Nav = ({
       </div>
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <div>
-        {user ? (
+      {user ? (
+          <>
+          <Link to="/user">User Profile</Link>
           <Link onClick={handleLogout}>Sign Out</Link>
+          </>
         ) : (
           <>
             <Link to="/register">Register</Link>
