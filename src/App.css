@@ -955,3 +955,36 @@ main.shifted {
   text-align: center;
 }
 
+
+
+
+
+
+
+.user-info {
+  display: flex;
+  align-items: center; /* Align items vertically centered */
+}
+
+.user-image {
+  width: 40px; /* Set the width of the image */
+  height: 40px; /* Set the height of the image */
+  border-radius: 50%; /* Make the image circular */
+  margin-left: 10px; /* Add some space between the text and the image */
+  object-fit: cover; /* Ensure the image covers the circular area without distortion */
+}
+
+/* Optional: Additional styles for better visual appearance */
+
+
+nav a {
+  margin: 0 10px; /* Space out the links */
+  text-decoration: none; /* Remove underline from links */
+  color: #ffffff; /* Text color */
+}
+
+nav a:hover {
+  text-decoration: underline; /* Underline on hover for better UX */
+}
+
+

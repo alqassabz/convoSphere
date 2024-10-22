@@ -11,6 +11,7 @@ import SideBar from './components/SideBar'
 import SignIn from './pages/SignIn'
 import Register from './pages/Register'
 import Details from './components/Details'
+import UserProfile from './components/UserProfile'
 import RightSideBar from './components/RightSideBar'
 
 function App() {
@@ -110,6 +111,7 @@ function App() {
               />
             }
           />{' '}
+          <Route path="/user"element={<UserProfile />} />
           <Route
             path="/signIn"
             element={<SignIn user={user} setUser={setUser} />}

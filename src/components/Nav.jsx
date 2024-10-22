@@ -1,6 +1,5 @@
-import { Link } from 'react-router-dom'
-import Search from './Search'
-
+import { Link } from 'react-router-dom';
+import Search from './Search';
 
 const Nav = ({
   user,
@@ -9,17 +8,24 @@ const Nav = ({
   searchTerm,
   setSearchTerm
 }) => {
-  console.log(user)
+  console.log(user);
+  if (user) {
+    console.log(`image is`, user.image);
+  }
 
   const publicOptions = (
     <nav>
       <button className="toggler" onClick={toggleSidebar}>
         ☰
       </button>
-      <div>
+      <div className="user-info">
         <h3>Welcome, {user ? user.name : 'Guest'}!</h3>
         {user && user.image ? (
-          <img src={user.image} alt={`${user.name}'s profile`} />
+          <img
+            className="user-image"
+            src={`http://localhost:3001${user.image}`}
+            alt={`${user.name}'s profile`}
+          />
         ) : (
           <div>No image available</div>
         )}
@@ -31,8 +37,11 @@ const Nav = ({
       </div>
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <div>
-        {user ? (
+      {user ? (
+          <>
+          <Link to="/user">User Profile</Link>
           <Link onClick={handleLogout}>Sign Out</Link>
+          </>
         ) : (
           <>
             <Link to="/register">Register</Link>
@@ -41,7 +50,7 @@ const Nav = ({
         )}
       </div>
     </nav>
-  )
+  );
 
   return (
     <header>
@@ -50,7 +59,7 @@ const Nav = ({
       </Link>
       {publicOptions}
     </header>
-  )
+  );
 }
 
-export default Nav
+export default Nav;
