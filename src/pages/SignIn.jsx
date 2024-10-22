@@ -5,26 +5,34 @@ import { SignInUser } from '../services/Auth'
 const SignIn = ({ user, setUser }) => {
   let navigate = useNavigate()
 
-  let initialState = { email: '', password: '', name: '', image: '' }
+  let initialState = { email: '', password: '' }
   const [formValues, setFormValues] = useState(initialState)
+  const [errorMessage, setErrorMessage] = useState('')
 
   const handleChange = (e) => {
-    console.log(formValues)
     setFormValues({ ...formValues, [e.target.name]: e.target.value })
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const payload = await SignInUser(formValues)
-    setFormValues(initialState)
-    setUser(payload)
-    navigate('/')
+    console.log(formValues)
+    try {
+      const payload = await SignInUser(formValues)
+      setFormValues(initialState)
+      console.log("payload is", payload)
+      setUser(payload)
+      navigate('/')
+    } catch (error) {
+      // Display error message to user
+      setErrorMessage('Failed to sign in. Please check your email and password.')
+    }
   }
 
   return (
     <div className="signin col">
       <div className="card-overlay centered">
         <form className="col" onSubmit={handleSubmit}>
+          {errorMessage && <div className="error-message">{errorMessage}</div>}
           <div className="input-wrapper">
             <label htmlFor="email">Email</label>
             <input
@@ -47,7 +55,6 @@ const SignIn = ({ user, setUser }) => {
             />
           </div>
           <button
-
             className="submit"
             disabled={!formValues.email || !formValues.password}
           >
