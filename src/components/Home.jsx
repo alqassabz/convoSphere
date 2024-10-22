@@ -19,18 +19,7 @@ const Home = ({
   }, []);
 
   // Filter communities based on the search term whenever communities or searchTerm change
-  useEffect(() => {
-    // Only filter if communities have been loaded
-    if (communities.length > 0) {
-      const filtered = communities.filter(community =>
-        community.name.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      setFilteredCommunities(filtered);
-    } else {
-      // Reset filtered communities if no communities exist
-      setFilteredCommunities([]);
-    }
-  }, [searchTerm, communities]);
+
 
   return (
     <>

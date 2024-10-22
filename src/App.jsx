@@ -10,6 +10,7 @@ import Nav from './components/Nav'
 import SideBar from './components/SideBar'
 import SignIn from './pages/SignIn'
 import Register from './pages/Register'
+import UserProfile from './components/UserProfile'
 
 function App() {
   const [issues, setIssues] = useState([])
@@ -102,8 +103,10 @@ function App() {
                 issues={issues}
                 setIssues={setIssues}
               />
+              
             }
           />{' '}
+          <Route path="/user" element={<UserProfile />} />
           <Route path="/signIn" element={<SignIn user={user} setUser={setUser} />} />
           <Route path="/register" element={<Register user={user} setUser={setUser} />} />
         </Routes>
