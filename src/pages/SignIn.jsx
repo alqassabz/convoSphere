@@ -5,10 +5,11 @@ import { SignInUser } from '../services/Auth'
 const SignIn = ({ user, setUser }) => {
   let navigate = useNavigate()
 
-  let initialState = { email: '', password: '', name: '' }
+  let initialState = { email: '', password: '', name: '', image: '' }
   const [formValues, setFormValues] = useState(initialState)
 
   const handleChange = (e) => {
+    console.log(formValues)
     setFormValues({ ...formValues, [e.target.name]: e.target.value })
   }
 

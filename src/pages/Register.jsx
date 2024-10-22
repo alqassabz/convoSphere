@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { RegisterUser } from '../services/Auth'
 
-const Register = () => {
+const Register = ({setUser}) => {
   let navigate = useNavigate()
 
   const initialState = {
@@ -28,17 +28,26 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const formData = new FormData()
-    formData.append('image', formValues.image)
-    // Object.entries(formValues).forEach((value) => {
-    //   console.log(value)
-    //   console.log(formData)
-    // })
-    // return
-    await RegisterUser(formValues)
+    formData.append('name', formValues.name)
+    formData.append('email', formValues.email)
+    formData.append('password', formValues.password)
+    formData.append('confirmPassword', formValues.confirmPassword)
+    formData.append('image', formValues.image)  // Append image file
+  
+    let res = await RegisterUser(formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+
+    setUser(res.data)
+    
+    // Clear form and redirect
     setFormValues(initialState)
     setPreviewImage(null)
     navigate('/signIn')
   }
+  
 
   return (
     <div className="signin col">
