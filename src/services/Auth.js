@@ -3,11 +3,10 @@ import Client from './api'
 export const SignInUser = async (data) => {
   try {
     const res = await Client.post('/auth/signIn', data)
+    console.log(res.data)
     // Set the current signed in users token to localStorage
-    localStorage.setItem('token', res.data.token)
-    console.log(res.data.user)
-    return res.data.user
-    
+    localStorage.setItem('token', res.data.data.token)
+    return res.data.data.user
   } catch (error) {
     throw error
   }
@@ -15,18 +14,14 @@ export const SignInUser = async (data) => {
 
 export const RegisterUser = async (formData) => {
   try {
-    // const formData = new FormData()
-    // formData.append('image', formValues.image)
-    // console.log(formData.get('image'))
     // console.log(formData)
-
-    
 
     const res = await Client.post('/auth/register', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
-    })
+    });
+    
     return res.data
   } catch (error) {
     throw error

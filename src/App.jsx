@@ -29,8 +29,8 @@ function App() {
 
   const getIssues = async () => {
     try {
-      let res = await axios.get('http://localhost:3001/issues')
-      console.log('Fetched issues:', res.data)
+      let res = await axios.get('http://localhost:3001/comment')
+      console.log('Fetched comments:', res.data)
       setIssues(res.data)
     } catch (err) {
       console.log(err)
@@ -39,8 +39,8 @@ function App() {
 
   const getCommunities = async () => {
     try {
-      let res = await axios.get('http://localhost:3001/communities')
-      console.log('Fetched communities:', res.data) // Check the fetched data
+      let res = await axios.get('http://localhost:3001/community')
+      console.log('Fetched community:', res.data) // Check the fetched data
       setCommunities(res.data)
     } catch (err) {
       console.error('Error fetching communities:', err)
