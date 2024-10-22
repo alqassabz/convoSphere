@@ -84,7 +84,7 @@ const Home = ({
                 <h3>{community.name}</h3>
               </div>
               <p className="description">{community.description}</p>
-              <p className="creator">Created by: {community.creator}</p>
+              <p className="creator">Created by: {community.name}</p>
             </div>
             </Link>
           ))

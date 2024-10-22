@@ -94,7 +94,7 @@ const CommunityDetails = ({ communities, user }) => {
               </div>
               <div>
                 <button className="viewComments-btn">
-                  <NavLink to="/comment">View Comments</NavLink>
+                  <NavLink to={`/comment/${field._id}`}>View Comments</NavLink>
                 </button>
               </div>
             </div>

@@ -1,62 +1,75 @@
 import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom' // Import useParams
 import axios from 'axios'
-import { HiReply } from 'react-icons/hi' // 
+import { HiReply } from 'react-icons/hi'
 
-const Comment = ({getIssues,
-  issues,
-  setIssues}) =>{
-  const [replies, setReplies] = useState({}); // Track replies per issue
-  const [showReplyInput, setShowReplyInput] = useState({}); // Track which reply input is shown
-    console.log(getIssues)
-  const initialState = { comment: '' }; // Define initial state
-  const [formState, setFormState] = useState(initialState);
+const Comment = ({ getIssues, issues, setIssues }) => {
+  const { sectionId } = useParams() // Get section ID from URL
+  const [replies, setReplies] = useState({}) // Track replies per issue
+  const [showReplyInput, setShowReplyInput] = useState({}) // Track which reply input is shown
+
+  const initialState = { comment: '' } // Define initial state
+  const [formState, setFormState] = useState(initialState)
+
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3001/comments/section/${sectionId}`
+        )
+        setIssues(response.data) // Assume response data contains comments for that section
+      } catch (err) {
+        console.error(err)
+      }
+    }
+    fetchComments()
+  }, [sectionId, setIssues])
 
   const submitReply = async (issueId) => {
-    if (!replies[issueId]?.trim()) return;
-    
-    console.log(`Submitting reply for issue ID: ${issueId}`); // Add this line for debugging
-  
+    if (!replies[issueId]?.trim()) return
+
+    console.log(`Submitting reply for issue ID: ${issueId}`)
+
     try {
       const res = await axios.post(
         `http://localhost:3001/issues/${issueId}/reply`,
         { comment: replies[issueId] }
-      );
+      )
       setIssues((prevIssues) =>
         prevIssues.map((issue) =>
           issue._id === issueId
             ? { ...issue, replies: res.data.replies }
             : issue
         )
-      );
-      setReplies((prevReplies) => ({ ...prevReplies, [issueId]: '' }));
-      setShowReplyInput((prev) => ({ ...prev, [issueId]: false }));
+      )
+      setReplies((prevReplies) => ({ ...prevReplies, [issueId]: '' }))
+      setShowReplyInput((prev) => ({ ...prev, [issueId]: false }))
     } catch (err) {
-      console.log(err);
+      console.error(err)
     }
-  };
-  
+  }
 
   const handleChange = (event) => {
-    setFormState({ ...formState, [event.target.id]: event.target.value });
-  };
-
-
-  useEffect(() => {
-    getIssues();
-  }, []);
+    setFormState({ ...formState, [event.target.id]: event.target.value })
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    let response = await axios.post('http://localhost:3001/issues', formState);
-    setIssues([...issues, response.data]);
-    setFormState(initialState);
-  };
+    e.preventDefault()
+    try {
+      let response = await axios.post('http://localhost:3001/issues', {
+        ...formState,
+        sectionId
+      }) // Send sectionId with the new comment
+      setIssues([...issues, response.data])
+      setFormState(initialState)
+    } catch (err) {
+      console.error(err)
+    }
+  }
 
-  
-  
   return (
     <>
-    <h2>Issues</h2>
+      <h2>Comments</h2>
       <div className="issues-container">
         {issues.map((issue) => (
           <div key={issue._id} className="card issue-card mb-3">
@@ -66,7 +79,6 @@ const Comment = ({getIssues,
                 <small>{new Date(issue.createdAt).toDateString()}</small>
               </p>
 
-              {/* Reply icon */}
               <div
                 className="reply-icon"
                 onClick={() =>
@@ -80,7 +92,6 @@ const Comment = ({getIssues,
               </div>
             </div>
 
-            {/* Render replies below the card body */}
             <div className="replies-container">
               {issue.replies && issue.replies.length > 0 ? (
                 <h5>Replies:</h5>
@@ -98,7 +109,6 @@ const Comment = ({getIssues,
                 ))}
             </div>
 
-            {/* Reply form below the replies */}
             {showReplyInput[issue._id] && (
               <div className="reply-form">
                 <input
@@ -119,16 +129,20 @@ const Comment = ({getIssues,
 
       <div>
         <form onSubmit={handleSubmit}>
-          <label className='comment-label' htmlFor="comment">Message</label>
+          <label className="comment-label" htmlFor="comment">
+            Message
+          </label>
           <textarea
             id="comment"
             cols="50"
             rows="2"
             onChange={handleChange}
             value={formState.comment}
-            className='textarea'
+            className="textarea"
           ></textarea>
-          <button className='comment-btn' type="submit">Send</button>
+          <button className="comment-btn" type="submit">
+            Send
+          </button>
         </form>
       </div>
     </>
