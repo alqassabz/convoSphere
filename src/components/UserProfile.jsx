@@ -61,6 +61,7 @@ const UserProfile = ({ getCommunities, communities, u }) => {
   useEffect(() => {
     getCommunities()
   }, [])
+  
 
   const handleUserClick = (userId) => {
     if (

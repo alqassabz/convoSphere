@@ -41,11 +41,7 @@ const CommunityDetails = ({ communities, user }) => {
     }
   }
 
-  const handleDelete = async () => {
-    const deleteUrl = `http://localhost:3001/community/${community._id}`
-    await axios.delete(deleteUrl, user)
-    navigate('/')
-  }
+  
 
   useEffect(() => {
     const selectedCommunity = communities.find(
@@ -91,12 +87,7 @@ const CommunityDetails = ({ communities, user }) => {
               </Link>
             </div>
           )}
-          <div>
-            <Link to="#" onClick={handleDelete}>
-              Delete Community
-            </Link>
-            <Link to={`/community/update/${id}`}>update</Link>
-          </div>
+          
         </div>
       </div>
 
