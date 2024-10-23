@@ -1,57 +1,94 @@
 import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom' // Import useParams
 import axios from 'axios'
-import { HiReply } from 'react-icons/hi' // 
+import { HiReply } from 'react-icons/hi'
 
-const Comment = ({getIssues,
-  issues,
-  setIssues}) =>{
-  const [replies, setReplies] = useState({}); // Track replies per issue
-  const [showReplyInput, setShowReplyInput] = useState({}); // Track which reply input is shown
+const Comment = ({ getIssues, issues, setIssues }) => {
+  const { sectionId } = useParams() // Get section ID from URL
+  const [replies, setReplies] = useState({}) // Track replies per issue
+  const [showReplyInput, setShowReplyInput] = useState({}) // Track which reply input is shown
 
-  const initialState = { comment: '' }; // Define initial state
-  const [formState, setFormState] = useState(initialState);
+  const initialState = { comment: '' } // Define initial state
+  const [formState, setFormState] = useState(initialState)
+
+  // Function to fetch comments
+  // const fetchComments = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       `http://localhost:3001/comments/section/${sectionId}`
+  //     )
+  //     setIssues(response.data) // Update state with fetched issues
+  //   } catch (err) {
+  //     console.error('Error fetching comments:', err)
+  //   }
+  // }
+
+  useEffect(() => {
+    console.log('Effect triggered - sectionId:', sectionId); // Log sectionId
+    const fetchComments = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3001/comments/section/${sectionId}`);
+        console.log('Fetched comments:', response.data); // Log the response
+        setIssues(response.data);
+      } catch (err) {
+        console.error('Error fetching comments:', err);
+      }
+    };
+  
+    if (sectionId) {
+      fetchComments();
+    } else {
+      console.warn('No sectionId available to fetch comments.');
+    }
+  }, [sectionId]);
+  
+  
 
   const submitReply = async (issueId) => {
-    if (!replies[issueId]?.trim()) return;
-    
-    console.log(`Submitting reply for issue ID: ${issueId}`); // Add this line for debugging
-  
+    if (!replies[issueId]?.trim()) return
+
+    console.log(`Submitting reply for issue ID: ${issueId}`)
+
     try {
       const res = await axios.post(
         `http://localhost:3001/issues/${issueId}/reply`,
         { comment: replies[issueId] }
-      );
+      )
       setIssues((prevIssues) =>
         prevIssues.map((issue) =>
           issue._id === issueId
-            ? { ...issue, replies: res.data.replies }
+            ? { ...issue, replies: [...issue.replies, res.data.reply] }
             : issue
         )
-      );
-      setReplies((prevReplies) => ({ ...prevReplies, [issueId]: '' }));
-      setShowReplyInput((prev) => ({ ...prev, [issueId]: false }));
+      )
+      setReplies((prevReplies) => ({ ...prevReplies, [issueId]: '' }))
+      setShowReplyInput((prev) => ({ ...prev, [issueId]: false }))
     } catch (err) {
-      console.log(err);
+      console.error('Error submitting reply:', err)
     }
-  };
-  
+  }
 
   const handleChange = (event) => {
-    setFormState({ ...formState, [event.target.id]: event.target.value });
-  };
+    setFormState({ ...formState, [event.target.id]: event.target.value })
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    let response = await axios.post('http://localhost:3001/issues', formState);
-    setIssues([...issues, response.data]);
-    setFormState(initialState);
-  };
+    e.preventDefault()
+    try {
+      const response = await axios.post('http://localhost:3001/issues', {
+        ...formState,
+        sectionId
+      })
+      setIssues((prevIssues) => [...prevIssues, response.data]) // Update state with new issue
+      setFormState(initialState) // Reset form after submission
+    } catch (err) {
+      console.error('Error submitting comment:', err)
+    }
+  }
 
-  
-  
   return (
     <>
-    <h2>Issues</h2>
+      <h2>Comments</h2>
       <div className="issues-container">
         {issues.map((issue) => (
           <div key={issue._id} className="card issue-card mb-3">
@@ -60,8 +97,6 @@ const Comment = ({getIssues,
               <p className="card-footer text-muted">
                 <small>{new Date(issue.createdAt).toDateString()}</small>
               </p>
-
-              {/* Reply icon */}
               <div
                 className="reply-icon"
                 onClick={() =>
@@ -74,26 +109,25 @@ const Comment = ({getIssues,
                 <HiReply />
               </div>
             </div>
-
-            {/* Render replies below the card body */}
             <div className="replies-container">
               {issue.replies && issue.replies.length > 0 ? (
-                <h5>Replies:</h5>
+                <>
+                  <h5>Replies:</h5>
+                  {issue.replies.map((reply, index) => (
+                    <div key={index} className="reply">
+                      <p>
+                        {reply.comment} -{' '}
+                        <small>
+                          {new Date(reply.createdAt).toDateString()}
+                        </small>
+                      </p>
+                    </div>
+                  ))}
+                </>
               ) : (
                 <p>No replies yet.</p>
               )}
-              {issue.replies &&
-                issue.replies.map((reply, index) => (
-                  <div key={index} className="reply">
-                    <p>
-                      {reply.comment} -{' '}
-                      <small>{new Date(reply.createdAt).toDateString()}</small>
-                    </p>
-                  </div>
-                ))}
             </div>
-
-            {/* Reply form below the replies */}
             {showReplyInput[issue._id] && (
               <div className="reply-form">
                 <input
@@ -103,7 +137,7 @@ const Comment = ({getIssues,
                     setReplies({ ...replies, [issue._id]: e.target.value })
                   }
                   placeholder="Write a reply..."
-                  style={{ width: '80%', marginTop: '5px' }} // Adjust the width as needed
+                  style={{ width: '80%', marginTop: '5px' }}
                 />
                 <button onClick={() => submitReply(issue._id)}>Submit</button>
               </div>
@@ -111,19 +145,22 @@ const Comment = ({getIssues,
           </div>
         ))}
       </div>
-
       <div>
         <form onSubmit={handleSubmit}>
-          <label className='comment-label' htmlFor="comment">Message</label>
+          <label className="comment-label" htmlFor="comment">
+            Message
+          </label>
           <textarea
             id="comment"
             cols="50"
             rows="2"
             onChange={handleChange}
             value={formState.comment}
-            className='textarea'
-          ></textarea>
-          <button className='comment-btn' type="submit">Send</button>
+            className="textarea"
+          />
+          <button className="comment-btn" type="submit">
+            Send
+          </button>
         </form>
       </div>
     </>

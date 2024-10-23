@@ -1,19 +1,28 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
-import { FaLessThanEqual } from 'react-icons/fa6'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
 
-const Form = ({ getCommunities, communities, setCommunities, user }) => {
-  const navigate = useNavigate()
-  const [iconValue, setIconValue] = useState('')
-  const [name, setName] = useState('')
-  const [emails, setEmails] = useState('')
-  const [description, setDescription] = useState('')
-  const [selectedIcon, setSelectedIcon] = useState('')
-  const [dropdownOpen, setDropdownOpen] = useState(false)
-  const [fields, setFields] = useState([{ name: 'General', description: 'A space for open discussions, sharing ideas, and connecting with fellow community members on a variety of topics.' }])
+const Update = ({ getCommunities, communities, setCommunities, user }) => {
+  let { id } = useParams();
+  const navigate = useNavigate();
+  const [community, setCommunity] = useState(null);
+  const [iconValue, setIconValue] = useState('');
+  const [name, setName] = useState('');
+  const [emails, setEmails] = useState('');
+  const [description, setDescription] = useState('');
+  const [selectedIcon, setSelectedIcon] = useState('');
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [fields, setFields] = useState([
+    {
+      name: 'General',
+      description:
+        'A space for open discussions, sharing ideas, and connecting with fellow community members on a variety of topics.',
+    },
+  ]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const BASE_URL = 'http://localhost:3001'
+  const BASE_URL = 'http://localhost:3001';
   const images = [
     { value: 'art', src: '/art.png' },
     { value: 'basketball', src: '/basketball.png' },
@@ -26,67 +35,85 @@ const Form = ({ getCommunities, communities, setCommunities, user }) => {
     { value: 'race', src: '/race.png' },
     { value: 'space', src: '/space.png' },
     { value: 'surf', src: '/surf.png' },
-    { value: 'travel', src: '/travel.png' }
-  ]
+    { value: 'travel', src: '/travel.png' },
+  ];
 
   const handleIconSelect = (icon) => {
-    setSelectedIcon(icon.value)
-    setIconValue(icon.value)
-    setDropdownOpen(false)
-  }
+    setSelectedIcon(icon.value);
+    setIconValue(icon.value);
+    setDropdownOpen(false);
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    setIsLoading(true);
+    setErrorMessage(''); // Clear previous error messages
 
     const communityData = {
-      icon: iconValue,
+      icon: selectedIcon || "medical", // use selected icon or fallback
       name,
-      creator: user.name,
       emails,
       description,
       fields,
-      participants: user
-    }
+    };
 
     try {
-      console.log(communityData.fields)
-      await axios.post(`${BASE_URL}/community`, communityData)
-      navigate('/')
+      let response = await axios.put(`${BASE_URL}/community/update/${community._id}`, communityData);
+      console.log(response);
+      navigate('/'); // Redirect after successful update
     } catch (error) {
-      console.error('Error creating community:', error)
+      console.error('Error updating community:', error);
+      setErrorMessage('Failed to update community. Please try again.'); // Set error message
+    } finally {
+      setIsLoading(false); // Reset loading state
     }
-  }
+  };
 
   const addField = () => {
     if (fields.length < 5) {
-      setFields([...fields, ''])
+      setFields([...fields, { name: '', description: '' }]);
     }
-  }
+  };
 
   const removeField = (index) => {
-    const newFields = fields.filter((_, i) => i !== index)
-    setFields(newFields)
-  }
+    const newFields = fields.filter((_, i) => i !== index);
+    setFields(newFields);
+  };
 
   const handleFieldChange = (index, event, isDescription = false) => {
-    const newFields = [...fields]
+    const newFields = [...fields];
     if (isDescription) {
       newFields[index] = {
         ...newFields[index],
-        description: event.target.value
-      }
+        description: event.target.value,
+      };
     } else {
       newFields[index] = {
         ...newFields[index],
-        name: event.target.value
-      }
+        name: event.target.value,
+      };
     }
-    setFields(newFields)
-  }
+    setFields(newFields);
+  };
+
+  useEffect(() => {
+    let selectedCommunity = communities.find((community) => community._id === id);
+    if (selectedCommunity) {
+      setCommunity(selectedCommunity);
+      // Prefill the form fields
+      setIconValue(selectedCommunity.icon || '');
+      setSelectedIcon(selectedCommunity.icon);
+      setName(selectedCommunity.name || '');
+      setEmails(selectedCommunity.emails || '');
+      setDescription(selectedCommunity.description || '');
+      setFields(selectedCommunity.fields || [{ name: '', description: '' }]);
+    }
+  }, [communities, id]);
 
   return (
     <form className="community-form" onSubmit={handleSubmit}>
-      <h1>Create Community</h1>
+      <h1>{community ? 'Edit Community' : 'Create Community'}</h1>
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
       <div className="custom-select">
         <label>Select an Icon:</label>
         <div
@@ -181,11 +208,11 @@ const Form = ({ getCommunities, communities, setCommunities, user }) => {
         ➕
       </button>
 
-      <button type="submit" className="submit-button">
-        Create Community
+      <button type="submit" className="submit-button" disabled={isLoading}>
+        {isLoading ? 'Updating...' : (community ? 'Update Community' : 'Create Community')}
       </button>
     </form>
-  )
-}
+  );
+};
 
-export default Form
+export default Update;

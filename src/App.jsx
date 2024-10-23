@@ -1,5 +1,9 @@
 import './App.css'
+
 import { Route, Routes, useParams } from 'react-router-dom'
+
+import { BrowserRouter } from 'react-router-dom'
+
 import Home from './components/Home'
 import Form from './components/Form' // Correct import
 import axios from 'axios'
@@ -11,6 +15,10 @@ import SideBar from './components/SideBar'
 import SignIn from './pages/SignIn'
 import Register from './pages/Register'
 import Details from './components/Details'
+
+import Update from './components/Update'
+import { CheckSession } from './services/Auth'
+
 import UserProfile from './components/UserProfile'
 import RightSideBar from './components/RightSideBar'
 import MyUserProfile from './components/MyUserProfile'
@@ -31,8 +39,9 @@ function App() {
 
   const getIssues = async () => {
     try {
-      let res = await axios.get('http://localhost:3001/comment')
+      let res = await axios.get('http://localhost:3001/issue')
       console.log('Fetched comments:', res.data)
+      console.log(res.data)
       setIssues(res.data)
     } catch (err) {
       console.log(err)
@@ -53,8 +62,20 @@ function App() {
     setIsSidebarOpen(!isSidebarOpen) // Toggle sidebar open/close state
   }
 
+  const checkToken = async () => {
+    //If a token exists, sends token to localStorage to persist logged in user
+    const user = await CheckSession()
+    console.log(user)
+    setUser(user.data)
+  }
+
   useEffect(() => {
-    getIssues()
+    const token = localStorage.getItem('token')
+
+    if (token) {
+      checkToken()
+    }
+    // getIssues()
     getCommunities()
   }, [])
 
@@ -88,6 +109,16 @@ function App() {
                 setCommunities={setCommunities}
                 searchTerm={searchTerm}
                 user={user}
+              />
+            }
+          />
+          <Route
+            path="/comment/:sectionId"
+            element={
+              <Comment
+                getIssues={getIssues}
+                issues={issues}
+                setIssues={setIssues}
               />
             }
           />
@@ -127,6 +158,10 @@ function App() {
           <Route
             path="/listings/:id"
             element={<Details communities={communities} user={user} />}
+          />
+          <Route
+            path="community/update/:id"
+            element={<Update communities={communities} user={user} />}
           />
         </Routes>
       </main>
