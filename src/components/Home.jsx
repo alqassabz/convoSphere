@@ -13,6 +13,7 @@ const Home = ({
   setCommunities,
   searchTerm,
   user,
+  getUsers
 }) => {
 
     const BASE_URL = 'http://localhost:3001'
@@ -21,6 +22,7 @@ const Home = ({
   // Fetch communities on component mount
   useEffect(() => {
     getCommunities();
+    getUsers()
   }, []);
 
   console.log(user)
