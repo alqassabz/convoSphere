@@ -15,9 +15,6 @@ const SideBar = ({ isOpen, toggleSidebar, communities }) => {
             </Link>
           ))}
         </ul>
-        <div className="list">
-          <Link to="/people">View All Members</Link>
-        </div>
       </div>
     </div>
   )
