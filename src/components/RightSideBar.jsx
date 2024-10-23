@@ -50,6 +50,10 @@ const RightSideBar = ({ isOpen, toggleSidebar, user }) => {
                   className="following-item"
                 >
                   <div className="friend-name">{u.name}</div>
+                  <img
+                    className="profile-image"
+                    src={user.image}
+                  />
                 </Link>
               ))
             : null}
