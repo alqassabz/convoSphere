@@ -22,6 +22,7 @@ import { CheckSession } from './services/Auth'
 import UserProfile from './components/UserProfile'
 import RightSideBar from './components/RightSideBar'
 import MyUserProfile from './components/MyUserProfile'
+import Users from './components/Users'
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('') // Manage search term state
 
   const [user, setUser] = useState(null)
+  const [users, setUsers] = useState(null)
   const handleLogout = () => {
     //Reset all auth related state and clear localStorage
     setUser(null)
@@ -58,6 +60,17 @@ function App() {
     }
   }
 
+  const getUsers = async () => {
+    try {
+      let res = await axios.get('http://localhost:3001/auth/users')
+      console.log('Fetched users:', res.data) // Check the fetched data
+      
+      setUsers(res.data)
+    } catch (err) {
+      console.error('Error fetching users:', err)
+    }
+  }
+
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen) // Toggle sidebar open/close state
   }
@@ -77,6 +90,7 @@ function App() {
     }
     // getIssues()
     getCommunities()
+    getUsers()
   }, [])
 
   return (
@@ -109,6 +123,7 @@ function App() {
                 setCommunities={setCommunities}
                 searchTerm={searchTerm}
                 user={user}
+                getUsers={getUsers}
               />
             }
           />
@@ -144,12 +159,16 @@ function App() {
               />
             }
           />{' '}
-          <Route path="/user/:id" element={<UserProfile />} />
-           <Route path="/user/me" element={<MyUserProfile />} />
+          <Route path="/user/:id" element={<UserProfile getCommunities={getCommunities} communities={communities} u={user} />} />
+           <Route path="/user/me" element={<MyUserProfile getCommunities={getCommunities} communities={communities} />} />
           
-          <Route
+           <Route
             path="/signIn"
             element={<SignIn user={user} setUser={setUser} />}
+          />
+          <Route
+            path="/users"
+            element={<Users user={user} getUsers={getUsers} users={users} />}
           />
           <Route
             path="/register"
