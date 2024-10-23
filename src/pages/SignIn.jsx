@@ -20,8 +20,10 @@ const SignIn = ({ user, setUser }) => {
       const payload = await SignInUser(formValues)
       setFormValues(initialState)
       console.log("payload is", payload)
+      
       setUser(payload)
       navigate('/')
+      localStorage.setItem('token', response.data.token);
     } catch (error) {
       // Display error message to user
       setErrorMessage('Failed to sign in. Please check your email and password.')

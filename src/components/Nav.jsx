@@ -21,7 +21,7 @@ const Nav = ({
       <div className="user-info">
         <h3>Welcome, {user ? user.name : 'Guest'}!</h3>
         {user && user.image ? (
-          <Link to={`/user/${user.id}`}><img
+          <Link to="/user/me"><img
             className="user-image"
             src={`http://localhost:3001${user.image}`}
             alt={`${user.name}'s profile`}
@@ -41,6 +41,7 @@ const Nav = ({
       {user ? (
           <>
           {/* <Link to={`/user/${user.id}`}>User Profile</Link> */}
+
           <Link onClick={handleLogout}>Sign Out</Link>
           </>
         ) : (
