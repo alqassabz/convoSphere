@@ -45,14 +45,15 @@ const RightSideBar = ({ isOpen, toggleSidebar, user }) => {
           {following
             ? following?.map((u) => (
                 <Link
-                  to={`auth/user/${u._id}/follow`}
+                  to={`/user/${u._id}`}
                   key={u._id}
                   className="following-item"
                 >
                   <div className="friend-name">{u.name}</div>
                   <img
-                    className="profile-image"
-                    src={user.image}
+                    className="profile-image2"
+                    src={`http://localhost:3001/${u.image}`} // Prefix the image path with the server URL
+                    alt={`${u.name}'s profile`}
                   />
                 </Link>
               ))
