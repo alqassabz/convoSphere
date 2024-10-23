@@ -7,7 +7,11 @@ const SideBar = ({ isOpen, toggleSidebar, communities }) => {
         <button className="close-btn" onClick={toggleSidebar}>
           ×
         </button>
-        <h3>Communities</h3>
+
+        <Link to="/users">
+        <h3>View All Profiles</h3></Link>
+        <h3>Communities</h3> {/* Optional header for the community list */}
+
         <ul>
           {communities.map((community, index) => (
             <Link to={`/listings/${community._id}`} key={index}>

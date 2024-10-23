@@ -46,6 +46,7 @@ const RightSideBar = ({ isOpen, toggleSidebar, user }) => {
             ? following?.map((u) => (
                 <Link
                   to={`/user/${u._id}`}
+                  to={`/user/${u._id}`}
                   key={u._id}
                   className="following-item"
                 >
