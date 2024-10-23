@@ -24,10 +24,11 @@ import RightSideBar from './components/RightSideBar'
 import MyUserProfile from './components/MyUserProfile'
 import Users from './components/Users'
 
-
 function App() {
   const [issues, setIssues] = useState([])
   const [communities, setCommunities] = useState([])
+  const [users, setUsers] = useState([])
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
   const [searchTerm, setSearchTerm] = useState('') // Manage search term state
 
@@ -62,9 +63,11 @@ function App() {
 
   const getUsers = async () => {
     try {
+
       let res = await axios.get('http://localhost:3001/auth/users')
       console.log('Fetched users:', res.data) // Check the fetched data
       
+
       setUsers(res.data)
     } catch (err) {
       console.error('Error fetching users:', err)
@@ -107,10 +110,15 @@ function App() {
         toggleSidebar={toggleSidebar}
         communities={communities}
       />
-      <RightSideBar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+      <RightSideBar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} user={user} />
 
       <main className={isSidebarOpen ? 'shifted' : ''}>
         <Routes>
+          <Route
+            path="/auth/user/:id/follow"
+            element={<RightSideBar user={user} />}
+            
+          />
           <Route
             path="/"
             element={
@@ -159,10 +167,13 @@ function App() {
               />
             }
           />{' '}
+
+<Route path="/user/me" element={<MyUserProfile getCommunities={getCommunities} communities={communities} />} />
           <Route path="/user/:id" element={<UserProfile getCommunities={getCommunities} communities={communities} u={user} />} />
-           <Route path="/user/me" element={<MyUserProfile getCommunities={getCommunities} communities={communities} />} />
+           
           
            <Route
+
             path="/signIn"
             element={<SignIn user={user} setUser={setUser} />}
           />
@@ -182,6 +193,7 @@ function App() {
             path="community/update/:id"
             element={<Update communities={communities} user={user} />}
           />
+        
         </Routes>
       </main>
     </div>

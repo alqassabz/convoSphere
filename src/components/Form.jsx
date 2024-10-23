@@ -8,6 +8,7 @@ const Form = ({ getCommunities, communities, setCommunities, user }) => {
   const [iconValue, setIconValue] = useState('')
   const [name, setName] = useState('')
   const [emails, setEmails] = useState('')
+  const [text, setText] = useState('')
   const [description, setDescription] = useState('')
   const [selectedIcon, setSelectedIcon] = useState('')
   const [dropdownOpen, setDropdownOpen] = useState(false)
@@ -45,12 +46,17 @@ const Form = ({ getCommunities, communities, setCommunities, user }) => {
       emails,
       description,
       fields,
-      participants: user
+      participants: user,
+    }
+    const autoEmailData={
+      emails,
+      text
     }
 
     try {
       console.log(communityData.fields)
       await axios.post(`${BASE_URL}/community`, communityData)
+      await axios.post(`${BASE_URL}/community/autoEmail`, autoEmailData)
       navigate('/')
     } catch (error) {
       console.error('Error creating community:', error)
@@ -139,6 +145,18 @@ const Form = ({ getCommunities, communities, setCommunities, user }) => {
           required
         />
       </div>
+
+      <div className="form-group">
+        <label htmlFor="message">Special Invitations message:</label>
+        <input
+          type="text"
+          id="text"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          required
+        />
+      </div>
+
 
       <div className="form-group">
         <label htmlFor="description">Description:</label>

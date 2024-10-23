@@ -1,16 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import axios from 'axios'
+import { jwtDecode } from 'jwt-decode'
 
-const RightSideBar = ({ isOpen, toggleSidebar }) => {
-  const [following, setFollowing] = useState([])
+const RightSideBar = ({ isOpen, toggleSidebar, user }) => {
+  const [following, setFollowing] = useState(null)
 
   useEffect(() => {
     const fetchFollowing = async () => {
       try {
         const token = localStorage.getItem('token')
+        if (!token) {
+          throw new Error('No token found')
+        }
+
+        // Decode the token to get user information
+        const decodedToken = jwtDecode(token)
+        const userId = decodedToken.id // or the appropriate key for your user ID
+
         const response = await axios.get(
-          'http://localhost:3001/user/following',
+          `http://localhost:3001/auth/user/following/${userId}`,
           {
             headers: { Authorization: `Bearer ${token}` }
           }
@@ -31,16 +40,23 @@ const RightSideBar = ({ isOpen, toggleSidebar }) => {
           ×
         </button>
         <h3>Following</h3>
+
         <div className="following-list">
-          {following.map((user) => (
-            <Link
-              to={`/profile/${user._id}`}
-              key={user._id}
-              className="following-item"
-            >
-              <div className="friend-name">{user.name}</div>
-            </Link>
-          ))}
+          {following
+            ? following?.map((u) => (
+                <Link
+                  to={`auth/user/${u._id}/follow`}
+                  key={u._id}
+                  className="following-item"
+                >
+                  <div className="friend-name">{u.name}</div>
+                  <img
+                    className="profile-image"
+                    src={user.image}
+                  />
+                </Link>
+              ))
+            : null}
         </div>
       </div>
     </div>
