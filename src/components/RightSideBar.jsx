@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import axios from 'axios'
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const RightSideBar = ({ isOpen, toggleSidebar }) => {
   const [following, setFollowing] = useState([])
@@ -10,7 +10,7 @@ const RightSideBar = ({ isOpen, toggleSidebar }) => {
       try {
         const token = localStorage.getItem('token')
         const response = await axios.get(
-          'http://localhost:3001/user/following', 
+          'http://localhost:3001/user/following',
           {
             headers: { Authorization: `Bearer ${token}` }
           }
