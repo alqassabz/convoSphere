@@ -28,7 +28,8 @@ form {
 
 .issue-card {
   margin-left: 20px;
-  background-color: #4a4b4b;
+  background-color: #292A45;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.7), 0 0 15px rgba(165, 180, 252, 0.5);
   border: 1px solid #e0e0e0;
   color: #fff; /* Adjusting for light text on dark background */
   border-radius: 20px;
@@ -462,8 +463,9 @@ textarea {
 }
 
 body{
-  background-color: #02162c;
-  color: white;
+  background-color: #1E1E2F;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  color: #A5B4FC;
 }
 
 
