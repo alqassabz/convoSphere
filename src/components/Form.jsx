@@ -41,7 +41,7 @@ const Form = ({ getCommunities, communities, setCommunities, user }) => {
     const communityData = {
       icon: iconValue,
       name,
-      creator: user.email,
+      creator: user.name,
       emails,
       description,
       fields,
