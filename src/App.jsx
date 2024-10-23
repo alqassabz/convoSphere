@@ -19,10 +19,8 @@ import Details from './components/Details'
 import Update from './components/Update'
 import { CheckSession } from './services/Auth'
 
-
 import UserProfile from './components/UserProfile'
 import RightSideBar from './components/RightSideBar'
-
 
 function App() {
   const [issues, setIssues] = useState([])
@@ -77,7 +75,6 @@ function App() {
     }
     // getIssues()
     getCommunities()
-    
   }, [])
 
   return (
@@ -145,18 +142,23 @@ function App() {
               />
             }
           />{' '}
-
           <Route path="/user/:id" element={<UserProfile />} />
-
-
-          <Route path="/signIn" element={<SignIn user={user} setUser={setUser} />} />
-          <Route path="/register" element={<Register user={user} setUser={setUser} />} />
-          <Route path="/listings/:id" element={<Details communities={communities} user={user} />} />
-          <Route path="community/update/:id" element={<Update communities={communities} user={user} />} />
-
-         
-          
-
+          <Route
+            path="/signIn"
+            element={<SignIn user={user} setUser={setUser} />}
+          />
+          <Route
+            path="/register"
+            element={<Register user={user} setUser={setUser} />}
+          />
+          <Route
+            path="/listings/:id"
+            element={<Details communities={communities} user={user} />}
+          />
+          <Route
+            path="community/update/:id"
+            element={<Update communities={communities} user={user} />}
+          />
         </Routes>
       </main>
     </div>

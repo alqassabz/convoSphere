@@ -21,25 +21,26 @@ const Nav = ({
       <div className="user-info">
         <h3>Welcome, {user ? user.name : 'Guest'}!</h3>
         {user && user.image ? (
-          <img
+          <Link to={`/user/${user.id}`}><img
             className="user-image"
             src={`http://localhost:3001${user.image}`}
             alt={`${user.name}'s profile`}
-          />
+          /></Link>
         ) : (
           <div>No image available</div>
         )}
       </div>
       <div>
         <Link to="/">Home</Link>
-        <Link to="/form">Add Community</Link>
-        <Link to="/comment">Comments</Link>
+        {user && (
+        <Link to="/form">Add Community</Link>)}
+        {/* <Link to="/comment">Comments</Link> */}
       </div>
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <div>
       {user ? (
           <>
-          <Link to={`/user/${user.id}`}>User Profile</Link>
+          {/* <Link to={`/user/${user.id}`}>User Profile</Link> */}
           <Link onClick={handleLogout}>Sign Out</Link>
           </>
         ) : (
