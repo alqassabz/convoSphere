@@ -33,7 +33,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('') // Manage search term state
 
   const [user, setUser] = useState(null)
-  const [users, setUsers] = useState(null)
+ 
   const handleLogout = () => {
     //Reset all auth related state and clear localStorage
     setUser(null)
