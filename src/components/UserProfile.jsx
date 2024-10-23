@@ -3,6 +3,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { jwtDecode } from 'jwt-decode'
 
+
 const UserProfile = ({ getCommunities, communities, u }) => {
   const { id } = useParams()
   const [user, setUser] = useState(null)
@@ -195,7 +196,7 @@ const UserProfile = ({ getCommunities, communities, u }) => {
               </Link>
             ))
           ) : (
-            <p>You have not created any communities.</p>
+            <></>
           )}
         </div>
       </div>

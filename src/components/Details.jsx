@@ -59,9 +59,10 @@ const CommunityDetails = ({ communities, user }) => {
     if (community) {
       console.log('Community updated:', community)
     }
-  }, [community]) // This useEffect will only run when `community` changes
+  }, []) // This useEffect will only run when `community` changes
 
-  return user && community ? (
+  return user ? (
+  user && community ? (
     <div className="detail">
       <div className="detail-header">
         <img
@@ -129,8 +130,9 @@ const CommunityDetails = ({ communities, user }) => {
       </button>
     </div>
   ) : (
-    navigate('/register')
-  )
+    // navigate('/register')
+    <></>
+  )):(navigate('/register'))
 }
 
 export default CommunityDetails
