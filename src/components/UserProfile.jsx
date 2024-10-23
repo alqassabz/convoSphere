@@ -44,6 +44,13 @@ const UserProfile = () => {
     getUser();
   }, [id]);
 
+  useEffect(() => {
+    if (user) {
+      console.log('Community updated:', user)
+    }
+  }, [user]) 
+
+
   const handleUserClick = (userId) => {
     if (user.followers.some(follower => follower._id === userId) || user.following.some(followed => followed._id === userId)) {
       navigate('/user/me'); 
@@ -54,13 +61,14 @@ const UserProfile = () => {
 
   const handleFollow = async () => {
     try {
-      await axios.put(`http://localhost:3001/auth/user/${user._id}/follow`, {}, {
+      let res = await axios.put(`http://localhost:3001/auth/user/${user._id}/follow`, {}, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
       });
       
       setIsFollowing(true);
+      setUser(res.data.user)
     } catch (error) {
       console.error('Error following user:', error);
     }
@@ -68,12 +76,13 @@ const UserProfile = () => {
 
   const handleUnfollow = async () => {
     try {
-      await axios.put(`http://localhost:3001/auth/user/${user._id}/unfollow`, {}, {
+      let res = await axios.put(`http://localhost:3001/auth/user/${user._id}/unfollow`, {}, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
       });
       setIsFollowing(false);
+      setUser(res.data.user)
     } catch (error) {
       console.error('Error unfollowing user:', error);
     }
