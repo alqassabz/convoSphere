@@ -13,6 +13,8 @@ import Register from './pages/Register'
 import Details from './components/Details'
 import UserProfile from './components/UserProfile'
 import RightSideBar from './components/RightSideBar'
+import MyUserProfile from './components/MyUserProfile'
+
 
 function App() {
   const [issues, setIssues] = useState([])
@@ -112,6 +114,8 @@ function App() {
             }
           />{' '}
           <Route path="/user/:id" element={<UserProfile />} />
+           <Route path="/user/me" element={<MyUserProfile />} />
+          
           <Route
             path="/signIn"
             element={<SignIn user={user} setUser={setUser} />}
