@@ -57,7 +57,7 @@ const Comment = ({ getIssues, issues, setIssues }) => {
       setIssues((prevIssues) =>
         prevIssues.map((issue) =>
           issue._id === issueId
-            ? { ...issue, replies: [...issue.replies, res.data.reply] }
+            ? { ...issue, replies: [...issue.replies, { comment: replies[issueId] }] }
             : issue
         )
       )

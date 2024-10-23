@@ -14,9 +14,6 @@ form {
   height: 30vh;
 }
 
-
-
-
 .issues-container {
   display: flex;
   flex-direction: column;
@@ -664,7 +661,7 @@ font-size: x-large;
   left: 0;
   width: 250px; /* Set your desired width */
   height: (100%-60px); /* Full height */
-  background-color: #333; /* Sidebar background color */
+  background-color: #292A45; /* Sidebar background color */
   color: white; /* Text color */
   transition: transform 0.3s ease; /* Smooth transition */
   transform: translateX(-100%); /* Hidden by default */
@@ -881,11 +878,15 @@ main.shifted {
   right: 0; /* Align to the right */
   width: 200px; /* Set the width to be smaller */
   height: calc(100% - 60px); /* Full height minus the navbar */
-  background-color: #333; /* Background color */
+  background-color: #292A45; /* Background color */
   color: white; /* Text color */
   transform: translateX(100%); /* Hidden by default */
   transition: transform 0.3s ease; /* Smooth transition */
   z-index: 1000; /* Make sure it appears above other content */
+}
+.rightSidebar a {
+  text-decoration: none;
+  color: white;
 }
 
 .rightSidebar.open {
