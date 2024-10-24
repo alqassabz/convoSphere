@@ -10,13 +10,14 @@ const MyUserProfile = ({ getCommunities, communities }) => {
     ? communities.filter((com) => com.creator === user.email)
     : []
 
-  const handleDelete = async (communityId) => { // Accept communityId as parameter
+  const handleDelete = async (communityId) => {
+    // Accept communityId as parameter
     const deleteUrl = `http://localhost:3001/community/${communityId}` // Use the passed communityId
     try {
       await axios.delete(deleteUrl, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`, // Include the token for authorization
-        },
+          Authorization: `Bearer ${localStorage.getItem('token')}` // Include the token for authorization
+        }
       })
       // Optionally, refresh the communities after deletion
       getCommunities()
@@ -91,7 +92,7 @@ const MyUserProfile = ({ getCommunities, communities }) => {
         <div className="boxes">
           {userCommunities.length > 0 ? (
             userCommunities.map((com) => (
-              <div className="box" key={com._id}>
+              <div className="box self" key={com._id}>
                 <div className="box-header">
                   <div className="community-icon">
                     <img
@@ -103,11 +104,19 @@ const MyUserProfile = ({ getCommunities, communities }) => {
                 </div>
                 <p className="description">{com.description}</p>
                 <p className="creator">Created by: {com.creator}</p>
-                <div>
-                  <Link to="#" onClick={() => handleDelete(com._id)}>
+                <div className="button-group">
+                  <button
+                    className="action-btn delete-btn"
+                    onClick={() => handleDelete(com._id)}
+                  >
                     Delete Community
+                  </button>
+                  <Link
+                    to={`/community/update/${com._id}`}
+                    className="action-btn update-btn"
+                  >
+                    Update
                   </Link>
-                  <Link to={`/community/update/${com._id}`}>Update</Link>
                 </div>
               </div>
             ))

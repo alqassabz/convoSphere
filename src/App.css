@@ -1,7 +1,18 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,400i,700');
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&family=Sixtyfour+Convergence&display=swap');
+
 body {
   margin: 0;
-  
   text-align: center;
+  /* background: linear-gradient(
+    to bottom,
+    #1c0c29,
+    #432b63,
+    #30243e
+  );  */
+  background-color: #1c0c29;
+  color: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 form {
@@ -14,9 +25,6 @@ form {
   height: 30vh;
 }
 
-
-
-
 .issues-container {
   display: flex;
   flex-direction: column;
@@ -24,6 +32,7 @@ form {
   width: 85%;
   margin-left: 110px;
   justify-content: space-between;
+  background-color: transparent;
 }
 
 .issue-card {
@@ -32,6 +41,12 @@ form {
   border: 1px solid #e0e0e0;
   color: #fff; /* Adjusting for light text on dark background */
   border-radius: 20px;
+  background-color: #292a45;
+}
+
+.shifted .issues-container{
+  margin-left: 30px;
+  width: 75%;
 }
 
 .card-title {
@@ -47,16 +62,13 @@ form {
 .card-body {
   display: flex;
   justify-content: space-between; /* This separates the two <p> elements */
-
+  background-color: #292a45;
+  border-radius: 20px;
 }
-
-
 
 small {
-  padding-right: 20px
+  padding-right: 20px;
 }
-
-
 
 .reply {
   background-color: #7f858a; /* Light blue background for replies */
@@ -70,11 +82,11 @@ small {
   margin-top: 10px;
   padding: 10px;
   border-top: 1px solid #ccc; /* Add a top border to separate replies */
+  border-radius: 20px;
 }
 
 .reply-form {
   margin: 10px 20px;
-
 }
 
 .reply-form input {
@@ -82,8 +94,9 @@ small {
   border-radius: 4px;
   background-color: #c6c1c1;
   border: 1px solid #ccc;
-  color: rgb(81, 79, 79)
+  color: rgb(81, 79, 79);
 }
+
 
 .reply-form button {
   margin-left: 5px;
@@ -99,22 +112,20 @@ small {
   background-color: #2e4f73; /* Darker shade on hover */
 }
 
-.reply-icon{
+.reply-icon {
   color: #c6c1c1;
-  padding-top:20px;
+  padding-top: 20px;
   padding-right: 20px;
 }
 
-.reply-icon:hover{
+.reply-icon:hover {
   cursor: pointer;
-  color:#000000
+  color: #000000;
 }
-
 
 /* .textarea{
   width:65%;
 } */
-
 
 .community-form {
   max-width: 500px;
@@ -126,8 +137,19 @@ small {
   height: 500px;
 }
 
+.shifted .community-form {
+  margin-left: 175px;
+}
+
 h1 {
   text-align: center;
+  font-size: 2.5rem;
+  color: #a5b4fc; /* Soft neon blue */
+}
+h2 {
+  text-align: center;
+  font-size: 2.2rem;
+  color: #a5b4fc; /* Soft neon blue */
 }
 
 .form-group {
@@ -199,19 +221,18 @@ textarea {
 }
 
 .submit-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #4CAF50;
+  background-color: #6c63ff; /* Bright space blue */
   color: white;
-  border: none;
+  padding: 10px;
   border-radius: 4px;
+  border: none;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .submit-button:hover {
-  background-color: #45a049; /* Darker green on hover */
+  background-color: #8b82ff; /* Lighter blue on hover */
 }
-
 
 /* Styling the container for community boxes */
 .boxes {
@@ -223,35 +244,27 @@ textarea {
   padding: 20px;
 }
 
-.boxes a{
+.boxes a {
   text-decoration: none;
 }
 
-
-
 /* Styling individual community box */
 .box {
-  background-color: #333;
+  background-color: #1e1e2f;
   color: white;
-  border: none;
   width: 350px;
   padding: 20px;
   border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   text-align: center;
 }
 
-/* Hover effect for the box */
 .box:hover {
   transform: translateY(-10px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.7), 0 0 15px rgba(165, 180, 252, 0.5); /* Glowing hover */
 }
 
-/* Header containing the title and icon */
 .box-header {
   display: flex;
   align-items: center;
@@ -259,30 +272,75 @@ textarea {
   margin-bottom: 15px;
 }
 
-/* Community icon container styling */
+/* For larger box on the homepage */
+.box-big {
+  background-color: #292a45;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.7), 0 0 15px rgba(165, 180, 252, 0.5);
+  color: white;
+  border: none;
+  width: 90%;
+  margin: 20px 50px;
+  padding: 20px;
+  border-radius: 15px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.box-header-big h3 {
+  font-size: 24px;
+  color: #ffffff;
+}
+
+.description-big {
+  font-size: 18px;
+  color: #e5e7eb;
+}
+
+.creator-big {
+  font-size: 16px;
+  color: #9ca3af;
+}
+
 .community-icon {
   width: 50px;
   height: 50px;
-  border-radius: 50%; /* Makes the container circular */
-  border: 2px solid #f0e59f; /* Border around the container */
-  display: flex; /* Use flexbox to center the image */
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  overflow: hidden; /* Hide any overflow of the image */
-  background-color: #f0e59f; /* Optional: background color */
+  border-radius: 50%;
+  border: 2px solid #a5b4fc; /* Neon border */
+  background-color: #1f2041;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
-/* Image inside the community icon */
 .community-icon img {
-  width: 30px; /* Adjust the image width */
-  height: 30px; /* Adjust the image height */
-  object-fit: cover; /* Make sure the image fits nicely */
-  border-radius: 10%; /* Optional: keep the image circular */
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
 }
 
+.box-header h3 {
+  font-size: 22px;
+  font-weight: bold;
+  color: #d1d5db; /* Light grey text */
+}
 
-.box img{
-  background-color:#f0e59f ;
+.description {
+  font-size: 16px;
+  color: #e5e7eb; /* Light text */
+  margin-bottom: 20px;
+}
+
+.creator {
+  font-size: 14px;
+  color: #9ca3af; /* Soft grey */
+}
+
+.box img {
+  background-color: #1f2041;
 }
 
 /* Title of the community */
@@ -290,25 +348,8 @@ textarea {
   font-family: 'Arial', sans-serif;
   font-size: 22px;
   font-weight: bold;
-  color: #f0e59f;
+  color: #292a45;
   margin: 0;
-}
-
-/* Community description in the middle */
-.description {
-  font-family: 'Verdana', sans-serif;
-  font-size: 16px;
-  color: #ddd;
-  line-height: 1.5;
-  margin-bottom: 20px;
-}
-
-/* Creator name or email at the bottom */
-.creator {
-  font-family: 'Courier New', monospace;
-  font-size: 14px;
-  color: #bbb;
-  margin-top: auto; /* Pushes it to the bottom of the box */
 }
 
 /* Responsive design for smaller screens */
@@ -323,12 +364,10 @@ textarea {
     margin-bottom: 20px;
   }
 
-  .box-big{
+  .box-big {
     width: 100%;
-
   }
 }
-
 
 /* General form styling */
 .community-form {
@@ -435,20 +474,12 @@ textarea {
   background-color: #555;
 }
 
-
-
-
-
-.box-big img{
-  background-color:#f0e59f ;
-}
-
 /* Title of the community */
 .box-header-big h3 {
   font-family: 'Arial', sans-serif;
   font-size: 22px;
   font-weight: bold;
-  color: #f0e59f;
+  color: #a5b4fc;
   margin: 0;
 }
 
@@ -461,14 +492,7 @@ textarea {
   margin-bottom: 20px;
 }
 
-body{
-  background-color: #02162c;
-  color: white;
-}
-
-
-
-nav{
+nav {
   max-height: 4em;
   min-height: 4em;
   display: flex;
@@ -478,17 +502,16 @@ nav{
   align-items: center;
   background-color: #000000;
   color: white;
-  
 }
 
-header{
-  position: fixed; 
+header {
+  position: fixed;
   width: 100%;
   height: 60px; /* Fixed height for the navbar */
   z-index: 1001; /* Ensures it appears above the sidebar */
 }
 
-nav a,
+/* nav a,
 nav h3 {
   text-decoration-color: var(--primary-bg);
   margin: auto 1em;
@@ -497,30 +520,11 @@ nav h3 {
   border-radius: 6px;
   font-weight: 800;
   transition: all 0.2s ease;
-}
+} */
 
 nav a:hover {
   color: var(--link-color-secondary);
   text-decoration-color: var(--link-color-primary);
-}
-
-
-/* Styling individual community box */
-.box-big {
-  background-color: #333;
-  color: white;
-  border: none;
-  /* width: 1380px; */
-  width: 90%;
-  margin: 20px 50px;
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
 }
 
 .textarea {
@@ -533,11 +537,35 @@ nav a:hover {
   margin: 20px 0;
 }
 
-.shifted .textarea, .shifted .comment-label, .shifted .comment-btn   {
+.shifted .textarea,
+.shifted .comment-label,
+.shifted .comment-btn {
   margin-left: -270px;
 }
 
-.comment-btn{
+.shifted .box-big {
+  /* margin-left: -100px; */
+  width: 70%;
+  display: flex;
+  justify-content: center;
+}
+.shifted .boxes {
+  width: 84%;
+}
+
+.shifted .details {
+  display: flex;
+  justify-content: center;
+  margin-left: 170px;
+  width: 60%;
+}
+
+.details {
+  display: flex;
+  justify-content: center;
+}
+
+.comment-btn {
   background-color: #302f2f;
   padding: 15px 10px;
   border: none;
@@ -546,17 +574,10 @@ nav a:hover {
   color: white;
 }
 
-.comment-btn:hover{
+.comment-btn:hover {
   background-color: #525151;
   color: black;
-  cursor:pointer;
-}
-
-
-/* Hover effect for the box */
-.box-big:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
 }
 
 /* Header containing the title and icon */
@@ -567,17 +588,16 @@ nav a:hover {
   margin-bottom: 15px;
 }
 
-
 .community-icon-big {
   width: 50px;
   height: 50px;
   border-radius: 50%; /* Makes the container circular */
-  border: 2px solid #f0e59f; /* Border around the container */
+  border: 2px solid white; /* Border around the container */
   display: flex; /* Use flexbox to center the image */
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
   overflow: hidden; /* Hide any overflow of the image */
-  background-color: #f0e59f; /* Optional: background color */
+  background-color: #1f2041; /* Optional: background color */
 }
 
 /* Image inside the community icon */
@@ -607,7 +627,8 @@ nav a:hover {
   padding: 0;
 }
 
-.sidebar ul li, .sidebar h3 {
+.sidebar ul li,
+.sidebar h3 {
   padding: 15px;
 }
 
@@ -630,29 +651,25 @@ nav a:hover {
   background: transparent; /* Optional: background color */
 }
 
-
-
 .close-btn {
-  background: none; 
-  border: none; 
-  font-size: 24px; 
-  cursor: pointer; 
-  position: absolute; 
-  top: 75px; 
-  right: 20px; 
-  color: #000; 
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  position: absolute;
+  top: 75px;
+  right: 20px;
+  color: #000;
 }
 
-
-
-.toggler{
-background-color: transparent;
-border: none;
-color: white;
-font-size: x-large;
+.toggler {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: x-large;
 }
 
-.toggler:hover{
+.toggler:hover {
   cursor: pointer;
 }
 
@@ -673,7 +690,6 @@ font-size: x-large;
   transform: translateX(0); /* Move into view when open */
 }
 
-
 main {
   transition: margin-left 0.3s ease; /* Smooth transition */
   padding: 20px; /* Optional padding */
@@ -684,30 +700,31 @@ main.shifted {
   margin-left: 250px; /* Match the sidebar's width */
 }
 
-
-.list{
+.list {
   margin-top: 100px;
   text-align: left;
   margin-left: 5px;
 }
 
-.search-input{
+.search-input {
   width: 300px;
   margin-right: 30px;
 }
-
 
 .sidebar {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
 
+.shifted h1 {
+  margin-left: -200px;
+}
 
 .dynamic-field {
   display: flex;
   align-items: center;
   margin-bottom: -15px;
-  gap: 10px
+  gap: 10px;
 }
 
 .dynamic-input {
@@ -750,35 +767,81 @@ main.shifted {
 .community-form {
   display: flex;
   flex-direction: column; /* Ensure fields stack vertically */
-  min-height: auto;       /* Allows dynamic height based on content */
-  height: auto;           /* Avoid fixed height */
-  width: 100%;            /* Make the form responsive */
+  min-height: auto; /* Allows dynamic height based on content */
+  height: auto; /* Avoid fixed height */
+  width: 100%; /* Make the form responsive */
   padding: 20px;
 }
 
-
-
 /* For the community details container */
 .detail {
-  background-color: #0a1d2c; /* Dark blue background */
-  color: #fff; /* White text for readability */
+  background-color: #292a45;
   padding: 2rem;
   border-radius: 12px;
   max-width: 900px;
-  margin: 2rem auto;
+  /* margin: 2rem ; */
+  /* background-color: #1e1e2f;  */
+  color: #a5b4fc;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  text-align: center;
 }
 
 .detail img {
   border-radius: 10px;
 }
 
-/* Header of the details section */
 .detail-header {
   display: flex;
   align-items: center;
   gap: 1rem;
   padding-bottom: 1rem;
   border-bottom: 2px solid #f0f0f0;
+  position: relative; /* Ensure the button is positioned relative to this */
+}
+
+.unjoin-btn,
+.join-btn {
+  background-color: #1e1e2f;
+  color: #a5b4fc;
+  padding: 8px 10px;
+  border-radius: 8px;
+  position: absolute; /* Absolute positioning */
+  top: 0; /* Move to the top */
+  right: 0; /* Align it to the right */
+  transform: translate(
+    -10px,
+    10px
+  ); /* Fine-tune the button position if needed */
+  text-decoration: none;
+}
+
+.join-btn {
+  background-color: #a5b4fc;
+  color: #1e1e2f;
+}
+
+.unjoin-btn:hover,
+.join-btn:hover {
+  background-color: #a5b4fc;
+  color: #1e1e2f;
+  padding: 8px 10px;
+  border-radius: 8px;
+  position: absolute; /* Absolute positioning */
+  top: 0; /* Move to the top */
+  right: 0; /* Align it to the right */
+  transform: translate(
+    -10px,
+    10px
+  ); /* Fine-tune the button position if needed */
+  text-decoration: none;
+}
+
+.join-btn:hover {
+  background-color: #1e1e2f;
+  color: #a5b4fc;
 }
 
 /* Image/icon styles */
@@ -818,28 +881,29 @@ main.shifted {
 
 /* Back button styling */
 .goBack {
-  background-color: #ff9e00;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
+  background-color: #1e1e2f;
+  color: #a5b4fc;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  border-radius: 4px;
+  padding: 10px 15px;
+  /* padding: 0.5rem 1rem; */
   margin-top: 1.5rem;
 }
 
 .goBack:hover {
-  background-color: #ff7a00;
+  background-color: #292a45;
+  color: #1e1e2f;
 }
 
 .goBack a {
-  color: #fff;
+  color: #a5b4fc;
   text-decoration: none;
 }
 
-
 .sections {
-  background-color: #02162c;
-  box-shadow: #246fa9;
+  background-color: #1e1e2f;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.7), 0 0 15px rgba(165, 180, 252, 0.5);
   padding: 10px 50px;
   border-radius: 20px;
   margin-bottom: 20px;
@@ -849,28 +913,40 @@ main.shifted {
 }
 
 .viewComments-btn {
-  background-color: #072b53;
-  color: #fff;
+  background-color: #a5b4fc;
+  color: #1e1e2f;
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 8px;
   font-size: 1rem;
-  
+}
+.viewComments-btn a {
+  text-decoration: none;
+  color: #292a45;
 }
 
-.viewComments-btn a{
+.viewComments-btn:hover,
+.viewComments-btn a:hover {
+  background-color: #393a57;
+  color: #a5b4fc;
+}
+
+.participants a {
+  color: white;
+  text-decoration: none;
+  padding: 8px 0;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.participants li:hover {
+  background-color: white;
+  color: #1f2937; /* Dark grey for contrast on white background */
+}
+
+.sidebar a {
   text-decoration: none;
   color: white;
-}
-
-
- .sidebar a {
-  text-decoration: none;
-  color: white;
-}
-
-.join-btn{
-  opacity: 1;
 }
 
 .rightSidebar {
@@ -891,6 +967,7 @@ main.shifted {
 }
 
 .rightSidebar-content {
+  margin-top: 80px;
   padding: 10px; /* Padding for inner content */
   overflow-y: auto; /* Enable scrolling if content is too tall */
 }
@@ -918,12 +995,6 @@ main.shifted {
   top: 10px; /* Adjusted position */
   right: 10px; /* Adjusted position */
   color: #fff; /* Close button color */
-}
-
-/* Add this to your CSS file */
-
-.rightSidebar {
-  /* existing styles */
 }
 
 .following-list {
@@ -955,12 +1026,6 @@ main.shifted {
   text-align: center;
 }
 
-
-
-
-
-
-
 .user-info {
   display: flex;
   align-items: center; /* Align items vertically centered */
@@ -976,7 +1041,6 @@ main.shifted {
 
 /* Optional: Additional styles for better visual appearance */
 
-
 nav a {
   margin: 0 10px; /* Space out the links */
   text-decoration: none; /* Remove underline from links */
@@ -986,8 +1050,6 @@ nav a {
 nav a:hover {
   text-decoration: underline; /* Underline on hover for better UX */
 }
-
-
 
 /*USER CSS */
 
@@ -1073,3 +1135,604 @@ li:hover {
 
 /* user css */
 
+/* Adjusting for smaller screens */
+@media (max-width: 768px) {
+  .boxes {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .box {
+    width: 90%;
+    margin-bottom: 20px;
+  }
+}
+
+.community-form {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.1
+  ); /* Optional: Add a light background to the form */
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 600px; /* Limit the width of the form */
+  margin: 20px auto; /* Center the form */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add some shadow */
+}
+.community-form h1 {
+  margin-bottom: 20px;
+}
+.form-group {
+  margin-bottom: 15px;
+}
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.2); /* Light background for inputs */
+  color: white; /* Text color for inputs */
+}
+input::placeholder,
+textarea::placeholder {
+  color: rgba(255, 255, 255, 0.7); /* Placeholder color */
+}
+button {
+  background-color: rgb(255, 255, 255);
+  color: rgb(55, 48, 107); /* Change button text color */
+  border: none;
+  border-radius: 4px;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+.signin {
+  display: inline;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  height: 100vh; /* Full height for centering */
+  width: 100vw;
+}
+.col {
+  padding: 130px 0;
+}
+
+.shifted .col {
+  margin-left: -200px;
+}
+.card-overlay1 {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.1
+  ); /* Light background for the form */
+  padding: 20px;
+  border-radius: 8px;
+  width: auto;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add shadow */
+}
+.card-overlay {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.1
+  ); /* Light background for the form */
+  padding: 20px;
+  border-radius: 8px;
+  width: auto;
+  height: 70vh;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add shadow */
+}
+.error-message {
+  color: red; /* Error message color */
+  margin-bottom: 15px;
+}
+.input-wrapper {
+  margin-bottom: 15px;
+}
+.box {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.1
+  ); /* Light background for the form */
+  padding: 20px;
+  border-radius: 8px;
+  width: 20vw;
+  height: 20vh;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add shadow */
+}
+.user-container {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.1
+  ); /* Light background for the form */
+  padding: 20px;
+  border-radius: 8px;
+  width: 50vw;
+  height: 60vh;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add shadow */
+}
+.user-name {
+  color: white;
+}
+.user-info {
+  color: white;
+}
+
+nav {
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(62, 11, 73, 1) 53%,
+    rgb(51, 6, 72) 97%
+  );
+}
+.stars {
+  background: url('https://www.transparenttextures.com/patterns/stardust.png')
+    repeat;
+  z-index: 0;
+  opacity: 1;
+  animation: moveStars 4s linear infinite;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+@keyframes moveStars {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+nav h3,
+nav a {
+  --fill-color: #af5694;
+  margin: 20px;
+  font: 800 1.5rem 'Concert One', serif;
+  text-decoration: none;
+  -webkit-text-stroke: 1px var(--fill-color);
+  background: linear-gradient(var(--fill-color) 0 100%) left / 0 no-repeat;
+  color: transparent;
+  background-clip: text;
+  transition: 0.5s linear;
+}
+nav a:hover {
+  background-size: 100%;
+}
+nav h3 {
+  color: #af5694;
+  font: 800 1.7rem 'Concert One', serif;
+  text-decoration: none;
+  background-clip: text;
+  transition: 0.5s linear;
+}
+
+.sidebar {
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(62, 11, 73, 1) 53%,
+    rgb(51, 6, 72) 97%
+  );
+}
+
+.list h3 {
+  font-family: 'Concert One', serif;
+  font-size: 23px;
+}
+.rightsidebar {
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(62, 11, 73, 1) 53%,
+    rgb(51, 6, 72) 97%
+  );
+}
+.rightSidebar-content h3 {
+  font-family: 'Concert One', serif;
+  font-size: 23px;
+}
+
+.profile-image2 {
+  width: 50px; /* Set desired width for the image */
+  height: 50px; /* Set desired height for the image */
+  margin-right: 20px; /* Add space to the right of the image */
+  border-radius: 50%; /* Make the image circular */
+  border: 3px solid #af5694; /* Optional border */
+}
+
+.rightSidebar {
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(62, 11, 73, 1) 53%,
+    rgb(51, 6, 72) 97%
+  );
+  z-index: 100;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 250px;
+  height: 100%;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+
+.rightSidebar.open {
+  transform: translateX(0);
+}
+
+.rightSidebar-content {
+  padding: 20px;
+  color: #af5694;
+  font-family: 'Concert One', serif;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.rightSidebar h3 {
+  font-size: 23px;
+  color: #af5694;
+  font-family: 'Concert One', serif;
+}
+
+.rightSidebar-content .following-list {
+  margin-top: 10px;
+}
+
+.rightSidebar-content .following-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+.rightSidebar-content .following-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.rightSidebar-content .friend-name {
+  margin-left: 10px;
+  color: #af5694;
+  font-family: 'Concert One', serif;
+  font-size: 18px;
+}
+
+.rightSidebar-content .profile-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #af5694;
+}
+
+/* Stars background effect */
+.rightSidebar .stars {
+  z-index: 0;
+  opacity: 1;
+  animation: moveStars 4s linear infinite;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+@keyframes moveStars {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+/* Close button styling */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background for contrast */
+  border: none;
+  color: #fff; /* White color for visibility */
+  cursor: pointer;
+  z-index: 9999; /* Make sure it's on top of everything */
+  padding: 5px 10px; /* Add some padding for better touch/click area */
+  border-radius: 5px; /* Make it look nicer */
+}
+
+/* Right sidebar container */
+.rightSidebar {
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(62, 11, 73, 1) 53%,
+    rgb(51, 6, 72) 97%
+  );
+  z-index: 100; /* Sidebar is lower than the close button */
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 250px;
+  height: 100%;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+
+/* Right sidebar content */
+.rightSidebar.open {
+  transform: translateX(0);
+}
+
+.user-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f6f7f8;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  min-height: 300px; /* A minimum height to keep it looking nice with little content */
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.shifted .user-container {
+  margin-left: 75px;
+}
+
+.user-container a {
+  text-decoration: none;
+  color: #1e1e2f;
+}
+
+.user-details {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.user-name {
+  font-size: 2rem;
+  color: #333;
+  margin: 10px 0;
+}
+
+.profile-image {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 20px;
+  border: 2px solid #007bff;
+}
+
+.user-info {
+  font-size: 1.1rem;
+  color: #666;
+  margin: 5px 0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding: 8px 0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  color: #1e1e2f;
+}
+
+.comms {
+  color: white;
+}
+
+.comms:hover {
+  color: #1e1e2f;
+}
+
+li:hover {
+  background-color: #e2e6ea;
+  border-radius: 4px;
+}
+
+.follow-button-container {
+  margin: 20px 0;
+}
+
+.follow-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.follow-button.follow {
+  background-color: #007bff;
+}
+
+.follow-button.follow:hover {
+  background-color: #0056b3;
+}
+
+.follow-button.unfollow {
+  background-color: #dc3545;
+}
+
+.follow-button.unfollow:hover {
+  background-color: #c82333;
+}
+
+.button-group {
+  padding-bottom: 100px;
+}
+
+.action-btn {
+  padding: 10px 20px;
+  margin: 15px 5px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Delete Button Styling */
+.delete-btn {
+  background-color: #e74c3c; /* Red for Delete */
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b; /* Darker red on hover */
+}
+
+/* Update Button Styling */
+.update-btn {
+  background-color: #3498db; /* Blue for Update */
+  color: white;
+}
+
+.update-btn:hover {
+  background-color: #2980b9; /* Darker blue on hover */
+}
+
+.self {
+  height: 210px;
+}
+
+.comment-btn {
+  background-color: #302f2f;
+  padding: 15px 10px;
+  border: none;
+  border-radius: 10px;
+  width: 150px;
+  color: white;
+}
+
+.comment-btn:hover {
+  background-color: #525151;
+  color: black;
+  cursor: pointer;
+}
+
+.reply {
+  background-color: #7f858a; /* Light blue background for replies */
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px 0;
+  color: black;
+}
+
+.replies-container {
+  margin-top: 10px;
+  padding: 10px;
+  border-top: 1px solid #ccc; /* Add a top border to separate replies */
+  background-color: #292a45;
+}
+
+.reply-form {
+  margin: 10px 20px;
+}
+
+.reply-form input {
+  padding: 5px;
+  border-radius: 4px;
+  background-color: #c6c1c1;
+  border: 1px solid #ccc;
+  color: rgb(81, 79, 79);
+}
+
+.reply-form button {
+  margin-left: 5px;
+  padding: 5px 10px;
+  background-color: #022041; /* Change button color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.reply-form button:hover {
+  background-color: #2e4f73; /* Darker shade on hover */
+}
+
+.reply-icon {
+  color: #c6c1c1;
+  padding-top: 20px;
+  padding-right: 20px;
+}
+
+.reply-icon:hover {
+  cursor: pointer;
+  color: #000000;
+}
+.friend-name {
+  font-size: 20px;
+  text-align: center;
+}
+
+.profile-image2 {
+  width: 50px; /* Set desired width for the image */
+  height: 50px; /* Set desired height for the image */
+  margin-right: 20px; /* Add space to the right of the image */
+  border-radius: 50%; /* Make the image circular */
+  border: 3px solid #AF5694; /* Optional border */
+}
+
+
+.shifted .comment-btn{
+  margin-right: 200px;
+}
+
+.shifted .textarea {
+  margin-right: 250px;
+  width: 50%;
+}
+
+.shifted .comment-label, .shifted h2{
+  margin-right: 200px;
+}
+
+
+.box-header h3 {
+  font-family: 'Arial', sans-serif;
+  font-size: 22px;
+  font-weight: bold;
+  color: #a5b4fc;
+  margin: 0;
+}

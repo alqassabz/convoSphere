@@ -32,7 +32,7 @@ const SignIn = ({ user, setUser }) => {
 
   return (
     <div className="signin col">
-      <div className="card-overlay centered">
+      <div className="card-overlay1 centered">
         <form className="col" onSubmit={handleSubmit}>
           {errorMessage && <div className="error-message">{errorMessage}</div>}
           <div className="input-wrapper">

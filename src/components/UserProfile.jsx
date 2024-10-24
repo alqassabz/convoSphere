@@ -76,41 +76,59 @@ const UserProfile = ({ getCommunities, communities, u }) => {
   }
 
   const handleFollow = async () => {
-    try {
-      let res = await axios.put(
-        `http://localhost:3001/auth/user/${user._id}/follow`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`
-          }
+  try {
+    await axios.put(
+      `http://localhost:3001/auth/user/${user._id}/follow`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
         }
-      )
-
-      setIsFollowing(true)
-      setUser(res.data.user)
-    } catch (error) {
-      console.error('Error following user:', error)
-    }
-  }
-
-  const handleUnfollow = async () => {
-    try {
-      let res = await axios.put(
-        `http://localhost:3001/auth/user/${user._id}/unfollow`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`
-          }
+      }
+    )
+    // After follow, re-fetch the user data
+    const response = await axios.get(
+      `http://localhost:3001/auth/user/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
         }
-      )
-      setIsFollowing(false)
-      setUser(res.data.user)
-    } catch (error) {
-      console.error('Error unfollowing user:', error)
-    }
+      }
+    )
+    setUser(response.data.data)
+    setIsFollowing(true)
+  } catch (error) {
+    console.error('Error following user:', error)
   }
+}
+
+const handleUnfollow = async () => {
+  try {
+    await axios.put(
+      `http://localhost:3001/auth/user/${user._id}/unfollow`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      }
+    )
+    // After unfollow, re-fetch the user data
+    const response = await axios.get(
+      `http://localhost:3001/auth/user/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      }
+    )
+    setUser(response.data.data)
+    setIsFollowing(false)
+  } catch (error) {
+    console.error('Error unfollowing user:', error)
+  }
+}
+
 
   return (
     <>

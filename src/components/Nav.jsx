@@ -15,6 +15,7 @@ const Nav = ({
 
   const publicOptions = (
     <nav>
+      <div className='stars'></div>
       <button className="toggler" onClick={toggleSidebar}>
         ☰
       </button>
@@ -30,6 +31,7 @@ const Nav = ({
           <div>No image available</div>
         )}
       </div>
+      <h3>ConvoSphere</h3>
       <div>
         <Link to="/">Home</Link>
         {user && (
