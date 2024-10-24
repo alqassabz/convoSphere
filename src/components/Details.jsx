@@ -63,6 +63,7 @@ const CommunityDetails = ({ communities, user }) => {
 
   return user ? (
   user && community ? (
+    <div className='details'>
     <div className="detail">
       <div className="detail-header">
         <img
@@ -73,28 +74,28 @@ const CommunityDetails = ({ communities, user }) => {
         <div className="listing-name">
           <h1>{community.name}</h1>
           <p>{community.description}</p>
+          </div>
           {community.participants.findIndex(
             (participant) => participant.id === user.id
           ) === -1 ? ( // explicitly check if index is -1
             <div>
-              <Link to="#" onClick={handleJoin}>
+              <Link className='join-btn' to="#" onClick={handleJoin}>
                 Join Community
               </Link>
             </div>
           ) : (
             <div>
-              <Link to="#" onClick={handleUnjoin}>
+              <Link className='unjoin-btn' to="#" onClick={handleUnjoin}>
                 Unjoin Community
               </Link>
             </div>
           )}
           
-        </div>
       </div>
 
       <div className="info-wrapper">
         <div className="listing-header">
-          <h2>Sections:</h2>
+          <h1>Sections:</h1>
           {community.fields.map((field) => (
             <div className="sections" key={field.name}>
               <div>
@@ -113,7 +114,7 @@ const CommunityDetails = ({ communities, user }) => {
         <div className="info-wrapper">
           <div className="listing-header">
             <h1>Participants</h1>
-            <ul>
+            <ul className='participants'>
               {community.participants.map((participant) => (
                 <Link to={`/user/${participant.id}`}>
                   {' '}
@@ -128,6 +129,7 @@ const CommunityDetails = ({ communities, user }) => {
       <button className="goBack">
         <NavLink to="/">Back</NavLink>
       </button>
+    </div>
     </div>
   ) : (
     // navigate('/register')

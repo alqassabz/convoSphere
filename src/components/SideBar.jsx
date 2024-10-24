@@ -15,7 +15,7 @@ const SideBar = ({ isOpen, toggleSidebar, communities }) => {
         <ul>
           {communities.map((community, index) => (
             <Link to={`/listings/${community._id}`} key={index}>
-              <li>{community.name}</li>
+              <li class="comms">{community.name}</li>
             </Link>
           ))}
         </ul>
