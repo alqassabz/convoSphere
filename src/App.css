@@ -37,7 +37,8 @@ form {
 
 .issue-card {
   margin-left: 20px;
-  background-color: #4a4b4b;
+  background-color: #292A45;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.7), 0 0 15px rgba(165, 180, 252, 0.5);
   border: 1px solid #e0e0e0;
   color: #fff; /* Adjusting for light text on dark background */
   border-radius: 20px;
@@ -492,7 +493,18 @@ textarea {
   margin-bottom: 20px;
 }
 
+
 nav {
+
+body{
+  background-color: #1E1E2F;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  color: #A5B4FC;
+}
+
+
+
+nav{
   max-height: 4em;
   min-height: 4em;
   display: flex;
@@ -679,7 +691,7 @@ nav a:hover {
   left: 0;
   width: 250px; /* Set your desired width */
   height: (100%-60px); /* Full height */
-  background-color: #333; /* Sidebar background color */
+  background-color: #292A45; /* Sidebar background color */
   color: white; /* Text color */
   transition: transform 0.3s ease; /* Smooth transition */
   transform: translateX(-100%); /* Hidden by default */
@@ -955,11 +967,15 @@ main.shifted {
   right: 0; /* Align to the right */
   width: 200px; /* Set the width to be smaller */
   height: calc(100% - 60px); /* Full height minus the navbar */
-  background-color: #333; /* Background color */
+  background-color: #292A45; /* Background color */
   color: white; /* Text color */
   transform: translateX(100%); /* Hidden by default */
   transition: transform 0.3s ease; /* Smooth transition */
   z-index: 1000; /* Make sure it appears above other content */
+}
+.rightSidebar a {
+  text-decoration: none;
+  color: white;
 }
 
 .rightSidebar.open {
@@ -1079,6 +1095,19 @@ nav a:hover {
   object-fit: cover;
   margin-bottom: 20px;
   border: 2px solid #007bff;
+}
+.profile-image2 {
+  width: 180px;
+  margin-top: 20px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 20px;
+  border: 3px solid #FFA500;
+}
+
+.friend-name {
+  font-size: larger;
 }
 
 .user-info {

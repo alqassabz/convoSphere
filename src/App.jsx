@@ -97,6 +97,7 @@ function App() {
   }, [])
 
   return (
+                
     <div className="App">
       <Nav
         user={user}
@@ -115,7 +116,7 @@ function App() {
       <main className={isSidebarOpen ? 'shifted' : ''}>
         <Routes>
           <Route
-            path="/auth/user/:id/follow"
+            path="/user/:id/follow"
             element={<RightSideBar user={user} />}
             
           />
